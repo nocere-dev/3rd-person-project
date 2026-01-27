@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     [Header("References")]
-    public Transform _orientation;
-    public Transform _player;
+    public Transform _playerCam;
+    public CharacterController _player;
     public Transform _playerObj;
-    public Rigidbody _playerPhys;
 
-    public float rotationSpeed;
+    [Header("Settings")]
+    [SerializeField] private float turnSmoothing = 0.25f;
+    [SerializeField] private float speed = 6f;
 
+    private float turnSmoothingVelocity;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -20,16 +22,19 @@ public class PlayerCam : MonoBehaviour
 
     private void Update()
     {
-        // Orientation rotation
-        Vector3 viewDir = _player.position - new Vector3(transform.position.x, _player.position.y, transform.position.z);
-        _orientation.forward = viewDir.normalized;
-
         // Player rotation
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = _orientation.forward * verticalInput + _orientation.right * horizontalInput;
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+        Vector3 inputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
-        if (inputDir != Vector3.zero)
-            _playerObj.forward = Vector3.Slerp(_playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+        if (inputDir.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _playerCam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVelocity, turnSmoothing);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            _player.Move(moveDir.normalized * speed * Time.deltaTime);
+        }
     }
 }
