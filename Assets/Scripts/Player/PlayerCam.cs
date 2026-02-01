@@ -1,40 +1,35 @@
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
     [Header("References")]
-    public Transform _playerCam;
-    public CharacterController _player;
-    public Transform _playerObj;
+    [SerializeField] Transform _playerCam;
+    [SerializeField] PlayerInputManager _input;
 
     [Header("Settings")]
-    [SerializeField] private float turnSmoothing = 0.25f;
-    [SerializeField] private float speed = 6f;
+    [SerializeField] private float cameraSensitivity = 1f;
+    [SerializeField] private float maxPitch = 80f;
 
-    private float turnSmoothingVelocity;
+    private float pitch;
+    private float yaw;
+
+    public float Yaw => yaw;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        yaw = transform.eulerAngles.y;
+        pitch = transform.eulerAngles.x;
+        if (pitch > 180f) pitch -= 360f;
     }
 
     private void Update()
     {
-        // Player rotation
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        Vector3 inputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
-        if (inputDir.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _playerCam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVelocity, turnSmoothing);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _player.Move(moveDir.normalized * speed * Time.deltaTime);
-        }
+        float mouseX = Input.GetAxisRaw
     }
 }
