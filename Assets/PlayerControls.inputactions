@@ -3,7 +3,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Keyboard",
+            "name": "Gameplay",
             "id": "583be6b4-7917-4a6a-9aee-f3d5ea5aed3c",
             "actions": [
                 {
@@ -28,6 +28,24 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "3129d856-c7f0-4f08-8aed-cdcdac5b0c2b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "cb414a5f-64f2-47d5-9e70-c3e7a4b91aba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "e0936668-9135-4f9a-a851-13455b0272ab",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -109,6 +127,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c6f39519-ec1a-41fa-a652-37009067f50a",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3932d56f-d39a-43fa-9072-3fb44fe46a27",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53fd61cb-6fd4-433f-b4f6-7654826a91b8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
