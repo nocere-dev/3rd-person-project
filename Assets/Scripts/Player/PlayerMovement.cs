@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 ///----------------------------------------------
 /// 
@@ -15,52 +16,101 @@ public enum Stance
     Crouching
 }
 
-public struct CharacterInput
-{
-    public Vector2 Move;
-    public bool Jump;
-    public bool Crouch;
-}
-
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public CharacterController _player;
+    public PlayerInput _input;
     public Transform _playerObj;
 
 
+
     [Header("Settings")]
-    [SerializeField] private float turnSmoothing = 0.25f;
+    [SerializeField] private LayerMask ceilingMask = ~0;
+
+
 
     [Header("Stance Settings")]
     [SerializeField] private float standingHeight = 2f;
     [SerializeField] private float crouchHeight = 1.2f;
+    private float currentHeight;
 
+
+
+    [Header("Movement Settings")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private float crouchSpeed = 0.5f;
+    [SerializeField] private float jumpSpeed = 6f;
+    
+    [SerializeField] private float turnSmoothing = 0.25f;
+    [SerializeField] private float moveDamping = 0.25f;
+
+
+
+
+    [Header("Physics Settings")]
+    [SerializeField] private float mass = 1f;
+
+
 
     private Stance stance = Stance.Standing;
-
+    bool IsCrouching => standingHeight - currentHeight > .1f;
     private float turnSmoothingVelocity;
+    Vector3 velocity;
 
+    // --INPUT ACTIONS--
+    InputAction moveAction;
+    InputAction jumpAction;
+    InputAction crouchAction;
 
-    void Start()
+    void Awake()
     {
+        _input = GetComponent<PlayerInput>();
+        _player = GetComponent<CharacterController>();
+        _input.actions.Enable();
+        
+        moveAction = _input.actions["Move"];
+        jumpAction = _input.actions["Jump"];
+        crouchAction = _input.actions["Crouch"];
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        _player.center = new Vector3(0f, 0f, 0f);
+        standingHeight = _player.height;
+        _player.center = new Vector3(0f, standingHeight / 2f, 0f);
     }
 
     private void Update()
     {
-        // Player rotation
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        Vector3 inputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        UpdateGravity();
+        UpdateMovement();
+    }
 
-        // Will update to newer input system, just want to get it working for now.
-        if (Input.GetKeyDown(KeyCode.C))
+    void UpdateGravity()
+    {
+        var gravity = Physics.gravity * mass * Time.deltaTime;
+        velocity.y = _player.isGrounded ? -1f : velocity.y + gravity.y;
+    }
+
+    void UpdateMovement()
+    {
+        currentHeight = _player.height;
+
+        // Player rotation
+        var moveInput = moveAction.ReadValue<Vector2>();
+        Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
+        Vector3 horizontalMove = Vector3.zero;
+
+        var jumpInput = jumpAction.WasPressedThisFrame();
+        if (jumpInput && _player.isGrounded)
+        {
+            velocity.y += jumpSpeed;
+            stance = Stance.Standing;
+        }
+
+        var crouchInput = crouchAction.WasPressedThisFrame();
+        if (crouchInput)
         {
             if (stance == Stance.Standing) EnterCrouch();
             else ExitCrouch();
@@ -75,10 +125,14 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             float currentSpeed = speed * (stance == Stance.Crouching ? crouchSpeed : 1);
-            _player.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
+            
+            horizontalMove = moveDir.normalized * currentSpeed;
         }
 
+        Vector3 motion = horizontalMove;
+        motion.y = velocity.y;
 
+        _player.Move(motion * Time.deltaTime);
     }
 
     // Setting the players stance and modifying the character based on the info for each stance, can be expanded with a new case and new stance in the enum
@@ -86,32 +140,28 @@ public class PlayerMovement : MonoBehaviour
     {
         stance = Stance.Crouching;
         _player.height = crouchHeight;
-        _player.center = new Vector3(0f, -0.4f, 0f);
-
+        _player.center = new Vector3(0f, crouchHeight / 2f, 0f);
     }
 
     private void ExitCrouch()
     {
-        if (!CanStandUp()) return;
+        if (HasCeilingAbove()) return;
 
         stance = Stance.Standing;
         _player.height = standingHeight;
-        _player.center = new Vector3(0f, 0f, 0f);
- 
+        _player.center = new Vector3(0f, standingHeight / 2f, 0f);
     }
 
-    private bool CanStandUp()
+    private bool HasCeilingAbove()
     {
-        float requiredHeadroom = standingHeight - _player.height;
+        Vector3 playerCenter = transform.TransformPoint(_player.center);
 
-        if (requiredHeadroom <= 0f) return true;
+        float radius = _player.radius;
+        float halfHeight = standingHeight * 0.5f;
 
-        Vector3 castOrigin = transform.position + Vector3.up * _player.height;
+        Vector3 bottom = playerCenter + Vector3.up * (radius - halfHeight);
+        Vector3 top = playerCenter + Vector3.up * (halfHeight - radius);
 
-        float castRadius = _player.radius * 0.95f;
-
-        bool blocked = Physics.SphereCast(castOrigin, castRadius, Vector3.up, out _, requiredHeadroom);
-
-        return !blocked;
+        return Physics.CheckCapsule(bottom, top, radius, ceilingMask, QueryTriggerInteraction.Ignore);
     }
 }
