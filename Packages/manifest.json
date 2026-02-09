@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.apyra.nvim-unity": "file:C:/Users/txcar/Downloads/nvim-unity-master/nvim-unity-master",
     "com.unity.ai.navigation": "2.0.9",
     "com.unity.cinemachine": "3.1.5",
     "com.unity.collab-proxy": "2.11.3",
