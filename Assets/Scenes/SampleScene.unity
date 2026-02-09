@@ -6425,7 +6425,6 @@ MonoBehaviour:
   throwPoint: {fileID: 17088490}
   assassin_belt:
   - {fileID: 5237486832842573047, guid: 9c47b3a8831024b4db24057c9fadb929, type: 3}
-  - {fileID: 7329716438591242588, guid: 72e66f8d79fd1ef49b375a0dea0edf61, type: 3}
   selectedToolIndex: 0
   throwSpeed: 10
 --- !u!43 &1014817840
