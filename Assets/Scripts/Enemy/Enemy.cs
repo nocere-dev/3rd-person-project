@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public enum EnemyMoveType
@@ -22,18 +21,25 @@ public class Enemy : MonoBehaviour
     [Header("AI Settings")]
     [SerializeField] private EnemyMoveType moveType;
     [SerializeField] private EnemyClass enemyClass;
-
     [SerializeField] private Transform pathHolder;
-
-    [SerializeField] private float viewDistance = 15f;
-    [SerializeField] private float fov = 45f;
+    [SerializeField] private Transform player;
     public Transform eyePosition;
+
+    [SerializeField] private LayerMask viewMask;
+    
+    
+    [Header("View Settings")]
+    [SerializeField] private Light spotLight;
+    [SerializeField] private float viewDistance;
+    private float viewAngle;
     
 
     [Header("Movement Settings")]
     [SerializeField] private float speed = 2f;
+    [SerializeField] private float turnSpeed = 720f;
     [SerializeField] private float waitTime = 1f;
     [SerializeField] private float arriveDistance = 0.5f;
+
 
     private Vector3[] waypoints;
     private int targetIndex;
@@ -42,14 +48,30 @@ public class Enemy : MonoBehaviour
     private enum PatrolState { Moving, Waiting }
     private PatrolState patrolState = PatrolState.Moving;
 
+    Color lightCol;
+
     void Start()
     {
+        lightCol = spotLight.color;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        viewAngle = spotLight.spotAngle;
+
         CacheWaypoints(); // Cache waypoints into an array on start 
         InitPatrol();
     }
 
     void Update()
     {
+ 
+        if (CanSeePlayer())
+        {
+            spotLight.color = Color.red;
+        }
+        else
+        {
+            spotLight.color = lightCol;
+        }
+        
         if (moveType != EnemyMoveType.Patroling) return; // Checks enemy move type is patrolling type
 
         // If there are no waypoints/path holders created or waypoint count is less than 2 do nothing
@@ -67,6 +89,25 @@ public class Enemy : MonoBehaviour
         {
             PatrolWait();
         }
+
+    }
+
+    bool CanSeePlayer()
+    {
+        if (Vector3.Distance(transform.position, player.position) < viewDistance)
+        {
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+
+            float angleToPlayer = Vector3.Angle(transform.forward, dirToPlayer);
+            if (angleToPlayer < viewAngle / 2f)
+            {
+                if (!Physics.Linecast(eyePosition.position, player.position, viewMask))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void InitPatrol()
@@ -109,6 +150,8 @@ public class Enemy : MonoBehaviour
         // Set current waypoint to the enemies next target position
         Vector3 target = waypoints[targetIndex];
 
+        TurnToFace(target);
+
         // Move enemy towards next target that was set above
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
@@ -120,6 +163,16 @@ public class Enemy : MonoBehaviour
             waitTimer = waitTime;
             patrolState = PatrolState.Waiting;
         }
+    }
+
+    private void TurnToFace(Vector3 lookTarget)
+    {
+        Vector3 dirToLook = (lookTarget - transform.position).normalized;
+        float targetAngle = 90 - MathF.Atan2(dirToLook.z, dirToLook.x) * Mathf.Rad2Deg;
+
+        float newAngle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
+        
+        transform.eulerAngles = Vector3.up * newAngle;
     }
 
     private void PatrolWait()
@@ -145,5 +198,8 @@ public class Enemy : MonoBehaviour
         }
 
         Gizmos.DrawLine(prevPos, startPos);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(eyePosition.position, transform.forward * viewDistance);
     }
 }
