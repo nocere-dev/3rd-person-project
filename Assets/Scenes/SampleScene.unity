@@ -8143,7 +8143,7 @@ PrefabInstance:
     - target: {fileID: 5987605633772359055, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
       propertyPath: 'assassin_belt.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fb01319109e861440aa7271ab76285b7, type: 2}
     - target: {fileID: 6391367350776022526, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
