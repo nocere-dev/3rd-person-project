@@ -15,7 +15,7 @@ public enum EnemyClass
 }
 
 
-private enum EnemyState 
+public enum EnemyState 
 {
     Waiting,
     Moving, 
