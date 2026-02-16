@@ -6,7 +6,7 @@ public class toolblet : MonoBehaviour
     
     public Transform throwPoint;
 
-    public GameObject[] assassin_belt;
+    public ToolBelt[] assassin_belt;
 
     [SerializeField] private int selectedToolIndex = 0;
 
