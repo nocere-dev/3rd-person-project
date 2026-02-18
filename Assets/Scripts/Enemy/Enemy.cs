@@ -15,7 +15,7 @@ public enum EnemyClass
 }
 
 
-private enum EnemyState 
+public enum EnemyState 
 {
     Waiting,
     Moving, 
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
             return;
         } 
 
-        if (EnemyState == EnemyState.Moving)
+        if (enemyState == EnemyState.Moving)
         {
             PatrolMove();
         }
@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
 
         targetIndex = (waypoints.Length > 1) ? 1 : 0;
 
-        EnemyState = EnemyState.Moving; // Set patrol state
+        enemyState = EnemyState.Moving; // Set patrol state
         waitTimer = 0f; // Guarantee no leftover state
     }
 
@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
         {
             transform.position = target; // Snap enemy to target point to avoid floating point inaccuracy
             waitTimer = waitTime;
-            EnemyState = EnemyState.Waiting;
+            enemyState = EnemyState.Waiting;
         }
     }
 
@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour
 
         // Advance to next index and wrap index back to 0
         targetIndex = (targetIndex + 1) % waypoints.Length;
-        EnemyState = EnemyState.Moving;
+        enemyState = EnemyState.Moving;
     }
 
     void OnDrawGizmos()
