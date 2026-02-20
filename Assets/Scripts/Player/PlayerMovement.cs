@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 public enum Stance
 {
     Standing,
+    Climbing,
     Crouching
 }
 
