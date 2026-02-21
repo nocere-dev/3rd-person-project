@@ -48,7 +48,7 @@ public class toolblet : MonoBehaviour
 
         if (hasHit)
         {
-            throwDirection = (hit.point - throwPoint.position).normalized;
+            throwDirection = (hit.point + throwPoint.position).normalized;
         }
 
         GameObject thrownTool = Instantiate(assassin_belt[toolIndex].toolPrefab, spawnPosition, Quaternion.identity);

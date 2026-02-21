@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4080253897604724346}
   m_Layer: 0
   m_Name: spark
-  m_TagString: Untagged
+  m_TagString: aggro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyMoveType
@@ -20,7 +22,8 @@ public enum EnemyState
     Waiting,
     Moving, 
     Chasing,
-    Searching
+    Searching,
+    Investigating
 }
 
 public class Enemy : MonoBehaviour
@@ -39,6 +42,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Light spotLight;
     [SerializeField] private float viewDistance;
     private float viewAngle;
+    //------------------Ollie additions-----------------------------
+    [SerializeField] private float detectRange;
+    [SerializeField] private float detectAngle;
+    //------------------Ollie additions-----------------------------
     
 
     [Header("Movement Settings")]
@@ -190,6 +197,30 @@ public class Enemy : MonoBehaviour
         targetIndex = (targetIndex + 1) % waypoints.Length;
         enemyState = EnemyState.Moving;
     }
+
+    //------------------Ollie additions-----------------------------
+    private void PatrolInvestigate()
+    {
+        Vector3 alertTarget = GameObject.FindGameObjectWithTag("aggro").transform.position;
+        TurnToFace(alertTarget);
+        StartCoroutine(AggroTimer());
+        enemyState = EnemyState.Moving;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("aggro"))
+        {
+            Debug.Log("HUuuuuuuuuuuuuuuuuuuuuuuuuuh???????????????????");
+            enemyState = EnemyState.Investigating;
+        }
+    }
+
+    private IEnumerator AggroTimer()
+    {
+        yield return new WaitForSeconds(5f);
+    }
+    //------------------Ollie additions-----------------------------
 
     void OnDrawGizmos()
     {
