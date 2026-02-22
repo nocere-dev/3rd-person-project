@@ -1,34 +1,22 @@
 using UnityEngine;
 
-public class PlayerDetector : MonoBehaviour
+public class PlayerDetector3D : MonoBehaviour
 {
-    public Vector3 boxSize = new Vector3(2, 2, 2); // size of detection box
-    public LayerMask playerLayer; // make a layer for the player
-    private bool playerDetected = false;
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        // Get the center of the box (this object's position)
-        Vector3 center = transform.position;
-
-        // Check for overlaps
-        Collider[] hits = Physics.OverlapBox(center, boxSize / 2, Quaternion.identity, playerLayer);
-
-        if (hits.Length > 0 && !playerDetected)
+        if (other.CompareTag("Player"))
         {
-            playerDetected = true;
-            Debug.Log("Player entered the detection area!");
-        }
-        else if (hits.Length == 0 && playerDetected)
-        {
-            playerDetected = false; // reset when player leaves
+            Debug.Log("Player entered the collider!");
         }
     }
 
-    // Optional: visualize the box in editor
-    private void OnDrawGizmosSelected()
+    private void OnTriggerExit(Collider other)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, boxSize);
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player exited the collider!");
+           
+        }
     }
 }
