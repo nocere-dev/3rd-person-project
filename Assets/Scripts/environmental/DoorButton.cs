@@ -16,7 +16,13 @@ public class PlayerDetector3D : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player exited the collider!");
-           
+
         }
     }
+    private bool keepPrinting = true;
+
+   
 }
+
+  
+
