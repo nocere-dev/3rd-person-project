@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/modularlevels/StartingArea.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/modularlevels/StartingArea.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +93,7 @@
       <workItem from="1771771771848" duration="2000" />
       <workItem from="1771771927879" duration="1000" />
       <workItem from="1771778288623" duration="3000" />
-      <workItem from="1771790684223" duration="690000" />
+      <workItem from="1771790684223" duration="1032000" />
     </task>
     <servers />
   </component>

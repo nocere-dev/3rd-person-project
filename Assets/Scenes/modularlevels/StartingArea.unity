@@ -4924,8 +4924,6 @@ GameObject:
   - component: {fileID: 779168117}
   - component: {fileID: 779168121}
   - component: {fileID: 779168120}
-  - component: {fileID: 779168122}
-  - component: {fileID: 779168123}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -5038,7 +5036,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908188c16cfe3d4ca11ca1da47eb625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  canInteract: 1
+  door: {fileID: 834328354}
+  boxRenderer: {fileID: 779168118}
+  interactColor: {r: 0, g: 1, b: 0, a: 1}
+  pressEUI: {fileID: 1032489248}
 --- !u!65 &779168121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5060,35 +5061,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000004, y: 1, z: 1.0000001}
   m_Center: {x: 0.0000076293945, y: -0.00000023841858, z: 0.0000076293945}
---- !u!114 &779168122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9446e8756299441a8973f89def3add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShowPressE
-  pressE: {fileID: 1032489248}
---- !u!114 &779168123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1575eddceab4864f9e36eb61196114e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableDoor
-  door: {fileID: 834328354}
-  boxRenderer: {fileID: 779168118}
-  interactColor: {r: 0, g: 1, b: 0, a: 1}
-  detectionScript: {fileID: 779168120}
 --- !u!1 &807621564
 GameObject:
   m_ObjectHideFlags: 0
