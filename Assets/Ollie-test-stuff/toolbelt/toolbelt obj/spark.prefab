@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 488726412667051433}
   - component: {fileID: 3124118600759997441}
   - component: {fileID: -4080253897604724346}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spark
   m_TagString: aggro
   m_Icon: {fileID: 0}

@@ -36,6 +36,8 @@ public class Enemy : MonoBehaviour
     public Transform eyePosition;
 
     [SerializeField] private LayerMask viewMask;
+
+    
     
     
     [Header("View Settings")]
@@ -44,7 +46,8 @@ public class Enemy : MonoBehaviour
     private float viewAngle;
     //------------------Ollie additions-----------------------------
     [SerializeField] private float detectRange;
-    [SerializeField] private float detectAngle;
+
+    [SerializeField] private LayerMask decoyMask;
     //------------------Ollie additions-----------------------------
     
 
@@ -199,26 +202,34 @@ public class Enemy : MonoBehaviour
     }
 
     //------------------Ollie additions-----------------------------
-    private void PatrolInvestigate()
-    {
-        Vector3 alertTarget = GameObject.FindGameObjectWithTag("aggro").transform.position;
-        TurnToFace(alertTarget);
-        StartCoroutine(AggroTimer());
-        enemyState = EnemyState.Moving;
-    }
+    bool distracted;
 
-    private void OnTriggerEnter(Collider other)
+    private void earRadius()
     {
-        if (other.CompareTag("aggro"))
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectRange, decoyMask);
+
+        if (colliders.Length > 0)
         {
-            Debug.Log("HUuuuuuuuuuuuuuuuuuuuuuuuuuh???????????????????");
-            enemyState = EnemyState.Investigating;
+            distracted = true;
+            if (distracted)
+            {
+                Transform decoytransform = colliders[0].transform;
+                TurnToFace(decoytransform.position);
+
+                PatrolMove();
+            }
+        }
+        else
+        {
+            distracted = false;
+
+            enemyState = EnemyState.Moving;
         }
     }
-
-    private IEnumerator AggroTimer()
+    void OnDrawGizmosSelected()
     {
-        yield return new WaitForSeconds(5f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
     }
     //------------------Ollie additions-----------------------------
 
