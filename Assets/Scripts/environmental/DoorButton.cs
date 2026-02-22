@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class PlayerDetector3D : MonoBehaviour
+public class DoorButton : MonoBehaviour
 {
+    [HideInInspector]
+    public bool canInteract = false; 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered the collider!");
+            canInteract = true;
+            Debug.Log("inside");
         }
     }
 
@@ -15,14 +18,8 @@ public class PlayerDetector3D : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited the collider!");
-
+            canInteract = false;
+            Debug.Log("outside");
         }
     }
-    private bool keepPrinting = true;
-
-   
 }
-
-  
-
