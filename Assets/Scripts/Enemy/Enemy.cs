@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyMoveType
@@ -20,7 +22,8 @@ public enum EnemyState
     Waiting,
     Moving, 
     Chasing,
-    Searching
+    Searching,
+    Investigating
 }
 
 public class Enemy : MonoBehaviour
@@ -33,12 +36,19 @@ public class Enemy : MonoBehaviour
     public Transform eyePosition;
 
     [SerializeField] private LayerMask viewMask;
+
+    
     
     
     [Header("View Settings")]
     [SerializeField] private Light spotLight;
     [SerializeField] private float viewDistance;
     private float viewAngle;
+    //------------------Ollie additions-----------------------------
+    [SerializeField] private float detectRange;
+
+    [SerializeField] private LayerMask decoyMask;
+    //------------------Ollie additions-----------------------------
     
 
     [Header("Movement Settings")]
@@ -190,6 +200,38 @@ public class Enemy : MonoBehaviour
         targetIndex = (targetIndex + 1) % waypoints.Length;
         enemyState = EnemyState.Moving;
     }
+
+    //------------------Ollie additions-----------------------------
+    bool distracted;
+
+    private void earRadius()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectRange, decoyMask);
+
+        if (colliders.Length > 0)
+        {
+            distracted = true;
+            if (distracted)
+            {
+                Transform decoytransform = colliders[0].transform;
+                TurnToFace(decoytransform.position);
+
+                PatrolMove();
+            }
+        }
+        else
+        {
+            distracted = false;
+
+            enemyState = EnemyState.Moving;
+        }
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+    }
+    //------------------Ollie additions-----------------------------
 
     void OnDrawGizmos()
     {

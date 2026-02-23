@@ -2,34 +2,33 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Smoke_Bomb : MonoBehaviour
+public class particle_gen : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] public GameObject smokeEffectPrefab;
-
-
+    [SerializeField] private GameObject particlePrefab;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-    }
-
-    
-    void Update()
-    {
-        StartCoroutine(DestroyAfterTime(2.5f));
+        
+        StartCoroutine(DespawnAfterTime(2.5f));
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        Instantiate(smokeEffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    public IEnumerator DestroyAfterTime(float time)
+    public IEnumerator DespawnAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        Instantiate(particlePrefab, transform.position, Quaternion.identity);
     }
 }

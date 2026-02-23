@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 public class toolblet : MonoBehaviour
 {
-    
+    public TextMeshProUGUI toolNameText;
+
     public Transform throwPoint;
 
     public Tools[] assassin_belt;
@@ -12,7 +14,7 @@ public class toolblet : MonoBehaviour
     
     void Start()
     {
-        
+        toolNameText.text = assassin_belt[selectedToolIndex].name;
     }
 
     
@@ -21,6 +23,7 @@ public class toolblet : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             selectedToolIndex = (selectedToolIndex + 1) % assassin_belt.Length;
+            toolNameText.text = assassin_belt[selectedToolIndex].name;
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
         }       
     }
@@ -45,7 +48,7 @@ public class toolblet : MonoBehaviour
 
         if (hasHit)
         {
-            throwDirection = (hit.point - throwPoint.position).normalized;
+            throwDirection = (hit.point + throwPoint.position).normalized;
         }
 
         GameObject thrownTool = Instantiate(assassin_belt[toolIndex].toolPrefab, spawnPosition, Quaternion.identity);
