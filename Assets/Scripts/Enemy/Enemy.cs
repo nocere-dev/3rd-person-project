@@ -66,10 +66,14 @@ public class Enemy : MonoBehaviour
 
     Color lightCol;
 
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     void Start()
     {
         lightCol = spotLight.color;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         viewAngle = spotLight.spotAngle;
 
         CacheWaypoints(); // Cache waypoints into an array on start 
