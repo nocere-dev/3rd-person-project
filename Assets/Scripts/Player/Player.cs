@@ -11,12 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float mass = 1f;
+    [SerializeField] private PlayerInputs input;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
     CharacterController controller;
-    
 
     Vector2 look;
     Vector3 velocity;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        if (!input) input = GetComponent<PlayerInputs>();
     }
     void Start()
     {
@@ -46,9 +47,10 @@ public class Player : MonoBehaviour
 
     void UpdateMovement()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
-        Vector3 input = new Vector3(x, 0f, y).normalized;
+        // var x = Input.GetAxisRaw("Horizontal");
+        // var y = Input.GetAxisRaw("Vertical");
+        var moveInput = input.move();
+        Vector3 input = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
 
         if (input.magnitude > 0.1f)
         {
