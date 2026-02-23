@@ -58,9 +58,9 @@ public class Player : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             
-            if (input.GetButtonDown("Jump") && controller.isGrounded){
-              velocity.y += jumpSpeed;
-            }
+            // if (input.GetButtonDown("Jump") && controller.isGrounded){
+            //   velocity.y += jumpSpeed;
+            // }
             controller.Move((moveDir * movementSpeed + velocity) * Time.deltaTime);
         }
     }
