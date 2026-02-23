@@ -5,18 +5,18 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - aggro
+  - ObjectToCollide
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
   - Ceiling
   - Obstacle
-  - player
-  - decoy
+  - 
+  - 
   - 
   - 
   - 

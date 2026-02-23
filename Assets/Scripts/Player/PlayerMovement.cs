@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
+///----------------------------------------------
+/// 
+/// TODO:
+/// CONTINUE DEVELOPMENT OF NEW INPUT SYSTEM TO REPLACE OLD ONE
+/// FIX HEAD COLLISION CHECK WHEN CROUCHING UNDER OBSTACLES
+/// 
+///----------------------------------------------
 
 // Add new stances here like prone
 public enum Stance
 {
     Standing,
     Climbing,
-    Jumping,
     Crouching
 }
 
@@ -18,46 +24,55 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput _input;
     public Transform _playerObj;
 
-    [Space]
+
+
     [Header("Settings")]
     [SerializeField] private LayerMask ceilingMask = ~0;
 
-    [Space]
+
+
     [Header("Stance Settings")]
     [SerializeField] private float standingHeight = 2f;
     [SerializeField] private float crouchHeight = 1.2f;
     private float currentHeight;
 
-    [Space]
+
+
     [Header("Movement Settings")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private float crouchSpeed = 0.5f;
     [SerializeField] private float jumpSpeed = 6f;
-    [SerializeField] private float climbingSpeed = 3f;
     
-    [Space]
     [SerializeField] private float turnSmoothing = 0.25f;
     [SerializeField] private float moveDamping = 0.25f;
 
-    [Space]
+
+
+
     [Header("Physics Settings")]
     [SerializeField] private float mass = 1f;
 
 
-    public Stance stance = Stance.Standing;
+
+    private Stance stance = Stance.Standing;
     bool IsCrouching => standingHeight - currentHeight > .1f;
     private float turnSmoothingVelocity;
     Vector3 velocity;
 
-    // --CHECKS--
-    private bool wasGrounded;
-    private bool requestedCrouch;
+    // --INPUT ACTIONS--
+    InputAction moveAction;
+    InputAction jumpAction;
+    InputAction crouchAction;
 
     void Awake()
     {
         _input = GetComponent<PlayerInput>();
         _player = GetComponent<CharacterController>();
         _input.actions.Enable();
+        
+        moveAction = _input.actions["Move"];
+        jumpAction = _input.actions["Jump"];
+        crouchAction = _input.actions["Crouch"];
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -70,16 +85,6 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdateGravity();
         UpdateMovement();
-        switch (stance)
-        {
-            case Stance.Standing:
-                UpdateMovement();
-                UpdateGravity();
-                break;
-            case Stance.Climbing:
-                UpdateClimbing();
-                break;
-        }
     }
 
     void UpdateGravity()
@@ -93,22 +98,23 @@ public class PlayerMovement : MonoBehaviour
         currentHeight = _player.height;
 
         // Player rotation
-        var moveInput = _input.actions["Move"].ReadValue<Vector2>();
+        var moveInput = moveAction.ReadValue<Vector2>();
         Vector3 inputDir = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
 
         Vector3 horizontalMove = Vector3.zero;
 
-        if (_input.actions["Crouch"].WasPressedThisFrame())
+        var jumpInput = jumpAction.WasPressedThisFrame();
+        if (jumpInput && _player.isGrounded)
         {
-            requestedCrouch = !requestedCrouch;
+            velocity.y += jumpSpeed;
+            stance = Stance.Standing;
         }
 
-        bool groundedBeforeMove = _player.isGrounded;
-
-        if (_input.actions["Jump"].WasPressedThisFrame() && groundedBeforeMove && !requestedCrouch)
+        var crouchInput = crouchAction.WasPressedThisFrame();
+        if (crouchInput)
         {
-            velocity.y = jumpSpeed;
-            stance = Stance.Jumping;
+            if (stance == Stance.Standing) EnterCrouch();
+            else ExitCrouch();
         }
 
         if (inputDir.magnitude >= 0.1f)
@@ -128,27 +134,6 @@ public class PlayerMovement : MonoBehaviour
         motion.y = velocity.y;
 
         _player.Move(motion * Time.deltaTime);
-
-        bool groundedAfterMove = _player.isGrounded;
-
-        if (groundedAfterMove && !wasGrounded && stance == Stance.Jumping)
-        {
-            stance = Stance.Standing;
-        }
-
-        if (groundedAfterMove)
-        {
-            if (requestedCrouch && stance != Stance.Crouching) EnterCrouch();
-
-            if (!requestedCrouch && stance == Stance.Crouching)
-            {
-                ExitCrouch();
-
-                if (stance == Stance.Crouching) requestedCrouch = true;
-            }
-        }
-
-        wasGrounded = groundedAfterMove;
     }
 
     // Setting the players stance and modifying the character based on the info for each stance, can be expanded with a new case and new stance in the enum
@@ -179,24 +164,5 @@ public class PlayerMovement : MonoBehaviour
         Vector3 top = playerCenter + Vector3.up * (halfHeight - radius);
 
         return Physics.CheckCapsule(bottom, top, radius, ceilingMask, QueryTriggerInteraction.Ignore);
-    }
-
-    private void UpdateClimbing()
-    {
-        var input = _input.actions["Move"].ReadValue<Vector2>();
-
-        var climbDir = climbingSpeed * Time.deltaTime;
-        velocity = Vector3.Lerp(velocity, input, climbDir);
-
-        _player.Move(velocity * climbDir);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-    }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 200, 20), "Current Stance: " + stance);
     }
 }
