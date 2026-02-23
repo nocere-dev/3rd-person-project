@@ -10,6 +10,8 @@ public class toolblet : MonoBehaviour
 
     public Tools[] assassin_belt;
 
+    public LayerMask playerLayer;
+
     [SerializeField] private int selectedToolIndex = 0;
     
     void Start()
@@ -25,15 +27,12 @@ public class toolblet : MonoBehaviour
             selectedToolIndex = (selectedToolIndex + 1) % assassin_belt.Length;
             toolNameText.text = assassin_belt[selectedToolIndex].name;
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
-        }       
-    }
+        }
 
-    void FixedUpdate()
-    {
         if (Input.GetMouseButtonDown(0))
         {
             Throw(selectedToolIndex);
-        }
+        }     
     }
 
     void Throw(int toolIndex)
@@ -41,7 +40,7 @@ public class toolblet : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
-        bool hasHit = Physics.Raycast(ray, out hit, 100f);
+        bool hasHit = Physics.Raycast(ray, out hit, 100f, ~playerLayer);
 
         Vector3 spawnPosition = throwPoint.position;
         Vector3 throwDirection = ray.direction;
