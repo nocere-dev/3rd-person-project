@@ -8,13 +8,15 @@ public class Player : MonoBehaviour
     public Transform cam;
 
     [SerializeField] private float mouseSensitivity = 1f;
-    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float mass = 1f;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
     CharacterController controller;
+    
 
     Vector2 look;
     Vector3 velocity;
@@ -55,6 +57,10 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            
+            if (input.GetButtonDown("Jump") && controller.isGrounded){
+              velocity.y += jumpSpeed;
+            }
             controller.Move((moveDir * movementSpeed + velocity) * Time.deltaTime);
         }
     }
