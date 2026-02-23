@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float viewDistance;
     private float viewAngle;
     //------------------Ollie additions-----------------------------
-    [SerializeField] private float detectRange;
+    [SerializeField] private float hearingRange;
 
     [SerializeField] private LayerMask decoyMask;
     //------------------Ollie additions-----------------------------
@@ -206,7 +206,7 @@ public class Enemy : MonoBehaviour
 
     private void earRadius()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectRange, decoyMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, hearingRange, decoyMask);
 
         if (colliders.Length > 0)
         {
@@ -229,7 +229,7 @@ public class Enemy : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.DrawWireSphere(transform.position, hearingRange);
     }
     //------------------Ollie additions-----------------------------
 
