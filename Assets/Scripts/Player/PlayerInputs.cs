@@ -17,7 +17,7 @@ public class PlayerInputs : MonoBehaviour
   public Vector2 Look { get; private set; }
   public bool JumpPressed { get; private set; }
   public bool CrouchPressed { get; private set; }
-  public bool SprintPressed { get; private set; }
+  public bool SprintHeld { get; private set; }
   public bool InteractPressed { get; private set; }
 
   private void Awake() {
@@ -54,5 +54,16 @@ public class PlayerInputs : MonoBehaviour
       // Continuous controls
       Move = move.ReadValue<Vector2>();
       Look = move.ReadValue<Vector2>();
+      SprintHeld = sprint.IsPressed();
+
+      //triggered inputs
+      JumpPressed = jump.WasPressedThisFrame();
+      CrouchPressed = crouch.WasPressedThisFrame();
   }
+
+  public void ConsumeOneFrameButtons()
+    {
+        JumpPressed = false;
+        CrouchPressed = false;
+    }
 }

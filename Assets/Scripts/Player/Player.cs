@@ -11,12 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float mass = 1f;
+    [SerializeField] private PlayerInputs input;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
     CharacterController controller;
-    
 
     Vector2 look;
     Vector3 velocity;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        if (!input) input = GetComponent<PlayerInputs>();
     }
     void Start()
     {
@@ -46,9 +47,10 @@ public class Player : MonoBehaviour
 
     void UpdateMovement()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
-        Vector3 input = new Vector3(x, 0f, y).normalized;
+        // var x = Input.GetAxisRaw("Horizontal");
+        // var y = Input.GetAxisRaw("Vertical");
+        var moveInput = input.Move();
+        Vector3 input = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
 
         if (input.magnitude > 0.1f)
         {
@@ -58,17 +60,18 @@ public class Player : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             
-            // if (input.GetButtonDown("Jump") && controller.isGrounded){
-            //   velocity.y += jumpSpeed;
-            // }
+            if (input.JumpPressed && controller.isGrounded){
+                velocity.y += jumpSpeed;
+            }
             controller.Move((moveDir * movementSpeed + velocity) * Time.deltaTime);
         }
+        input.ConsumeOneFrameButtons();
     }
 
     void UpdateLook()
     {
-        look.x += Input.GetAxis("Mouse X");
-        look.y += Input.GetAxis("Mouse Y");
+        look.x += input.Look.x * mouseSensitivity;
+        look.y += input.Look.y * mouseSensitivity;
 
         look.y = Mathf.Clamp(look.y, -90f, 90f);
     }
