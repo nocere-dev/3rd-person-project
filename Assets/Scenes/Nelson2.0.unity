@@ -1422,6 +1422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Assassin
       objectReference: {fileID: 0}
+    - target: {fileID: 5565114715015593535, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1132620459}
     - target: {fileID: 6391367350776022526, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.98677
@@ -1662,6 +1666,7 @@ GameObject:
   - component: {fileID: 1132620459}
   - component: {fileID: 1132620458}
   - component: {fileID: 1132620461}
+  - component: {fileID: 1132620462}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1710,7 +1715,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1736,8 +1741,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132620457}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.23420802, y: -0.0000000011086378, z: 2.6708027e-10, w: 0.9721865}
+  m_LocalPosition: {x: 13.98677, y: 4.1550817, z: -8.565292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1787,6 +1792,38 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1132620462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132620457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &1614671243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1836,7 +1873,7 @@ MonoBehaviour:
     Enabled: 1
     TerrainLayers:
       serializedVersion: 2
-      m_Bits: 8
+      m_Bits: 0
     MaximumRaycast: 10
     Damping: 0.5
 --- !u!114 &1614671245
