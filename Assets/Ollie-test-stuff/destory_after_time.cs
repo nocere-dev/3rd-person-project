@@ -5,9 +5,11 @@ using System.Collections.Generic;
 public class destory_after_time : MonoBehaviour
 {
     
+    public float timeToDestroy = 5f;
+    
     void Update()
     {
-        StartCoroutine(DestroyAfterTime(7f));
+        StartCoroutine(DestroyAfterTime(timeToDestroy));
     }
 
     public IEnumerator DestroyAfterTime(float time)

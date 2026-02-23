@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a50f9626aa1f04cb179e815f64e910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveType: 1
+  moveType: 0
   enemyClass: 0
   pathHolder: {fileID: 0}
   player: {fileID: 0}
