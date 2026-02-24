@@ -6290,7 +6290,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &926657313
@@ -6326,7 +6326,9 @@ MonoBehaviour:
   movementSpeed: 5
   jumpSpeed: 5
   mass: 1
+  acceleration: 10
   turnSmoothTime: 0.1
+  turnSmoothVelocity: 0
 --- !u!114 &926657315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6336,10 +6338,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 926657310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11aefa1a0961e4c43b7387e898b214a5, type: 3}
+  m_Script: {fileID: 11500000, guid: d254032881e4269179e0eb2ef130ad55, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputs
-  playerInput: {fileID: 926657311}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSprinting
 --- !u!1 &927409148
 GameObject:
   m_ObjectHideFlags: 0
