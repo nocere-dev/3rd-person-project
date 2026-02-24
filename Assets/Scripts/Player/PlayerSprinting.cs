@@ -24,7 +24,7 @@ public class PlayerSprinting : MonoBehaviour
         var sprintInput = sprintAction.ReadValue<float>();
         if (sprintInput == 0) return;
 
-        var forwardMovementFactor = Mathf.Clamp01(Vector3.Dot(player.transform.forward, player.velocity.normalized));
+        var forwardMovementFactor = Mathf.Clamp01(Vector3.Dot(player.transform.forward, player.CurrentVelocity.normalized));
         var multiplier = Mathf.Lerp(1f, sprintMultiplier, forwardMovementFactor);
 
         player.movementSpeedMultiplier *= multiplier;
