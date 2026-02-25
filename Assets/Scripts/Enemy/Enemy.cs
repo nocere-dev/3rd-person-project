@@ -46,7 +46,8 @@ public class Enemy : MonoBehaviour
     private float viewAngle;
     //------------------Ollie additions-----------------------------
     [SerializeField] private float hearingRange;
-
+    private bool distracted;
+    private Vector3 lastDecoyPos;
     [SerializeField] private LayerMask decoyMask;
     //------------------Ollie additions-----------------------------
     
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour
 
         CacheWaypoints(); // Cache waypoints into an array on start 
         InitPatrol();
+        distracted = false;
     }
 
     void Update()
@@ -95,9 +97,15 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("No or less than 2 waypoints created. Add more points.");
             return;
-        } 
+        }
 
-        if (enemyState == EnemyState.Moving)
+        earRadius();
+
+        if (enemyState == EnemyState.Investigating)
+        {
+            investigateMove();
+        }
+        else if (enemyState == EnemyState.Moving)
         {
             PatrolMove();
         }
@@ -202,7 +210,6 @@ public class Enemy : MonoBehaviour
     }
 
     //------------------Ollie additions-----------------------------
-    bool distracted;
 
     private void earRadius()
     {
@@ -211,18 +218,21 @@ public class Enemy : MonoBehaviour
         if (colliders.Length > 0)
         {
             distracted = true;
-            if (distracted)
-            {
-                Transform decoytransform = colliders[0].transform;
-                TurnToFace(decoytransform.position);
-
-                PatrolMove();
-            }
+            lastDecoyPos = colliders[0].transform.position;
+            enemyState = EnemyState.Investigating;
+            Debug.Log("HUUUUUUUUUUUUUUUUUUUUUHHHHHHHHH");
         }
-        else
+    }
+
+    private void investigateMove()
+    {
+        TurnToFace(lastDecoyPos);
+
+        transform.position = Vector3.MoveTowards(transform.position, lastDecoyPos, speed * Time.deltaTime);
+
+        if((transform.position - lastDecoyPos).sqrMagnitude <= arriveDistance * arriveDistance)
         {
             distracted = false;
-
             enemyState = EnemyState.Moving;
         }
     }
