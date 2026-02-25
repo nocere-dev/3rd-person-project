@@ -6213,6 +6213,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1265233441}
+    - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
+      propertyPath: hearingRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
+      propertyPath: decoyMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6821,7 +6829,7 @@ Transform:
   m_GameObject: {fileID: 1092384823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 1.03, z: 0.46}
+  m_LocalPosition: {x: 0.74, y: 1.25, z: 0.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8587,9 +8595,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 926657313}
     - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
+      propertyPath: moveType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1793756218}
+    - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
+      propertyPath: hearingRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973192325816512810, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
+      propertyPath: decoyMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
