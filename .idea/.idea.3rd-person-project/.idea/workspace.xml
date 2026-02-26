@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-    </list>
+    <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,7 +95,7 @@
       <workItem from="1771771927879" duration="1000" />
       <workItem from="1771778288623" duration="3000" />
       <workItem from="1771790684223" duration="1032000" />
-      <workItem from="1772050367232" duration="459000" />
+      <workItem from="1772050367232" duration="1052000" />
     </task>
     <servers />
   </component>
