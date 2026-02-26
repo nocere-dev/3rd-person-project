@@ -1899,6 +1899,10 @@ PrefabInstance:
       value: assassin
       objectReference: {fileID: 0}
     - target: {fileID: 3868475952314094111, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
+      propertyPath: _playerObj
+      value: 
+      objectReference: {fileID: 203870616}
+    - target: {fileID: 3868475952314094111, guid: d94ca6d853ddc7947b26b82c7b0fc671, type: 3}
       propertyPath: ceilingMask.m_Bits
       value: 192
       objectReference: {fileID: 0}
