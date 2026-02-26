@@ -14,6 +14,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@1e87cf1dccb8/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
@@ -96,6 +97,7 @@
       <workItem from="1771778288623" duration="3000" />
       <workItem from="1771790684223" duration="1032000" />
       <workItem from="1772050367232" duration="1052000" />
+      <workItem from="1772066324851" duration="115000" />
     </task>
     <servers />
   </component>
