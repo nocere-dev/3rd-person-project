@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/modularlevels/GreyBox.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/modularlevels/GreyBox.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +15,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Dialougue/FirstTriggerMaze.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@1e87cf1dccb8/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -40,6 +46,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -94,6 +101,8 @@
       <workItem from="1771771927879" duration="1000" />
       <workItem from="1771778288623" duration="3000" />
       <workItem from="1771790684223" duration="1032000" />
+      <workItem from="1772050367232" duration="1052000" />
+      <workItem from="1772066324851" duration="115000" />
     </task>
     <servers />
   </component>

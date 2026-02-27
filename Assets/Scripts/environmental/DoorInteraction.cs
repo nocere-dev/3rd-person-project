@@ -40,7 +40,6 @@ public class DoorInteraction : MonoBehaviour
 
         private void Update()
         {
-            // Only allow interaction if player is in range
             if (playerInRange && Input.GetKeyDown(KeyCode.E))
             {
                 Interact();
@@ -61,6 +60,6 @@ public class DoorInteraction : MonoBehaviour
             if (pressEUI != null)
                 pressEUI.SetActive(false);
 
-            Debug.Log("Interaction triggered!");
+            Debug.Log("Interaction!");
         }
     }

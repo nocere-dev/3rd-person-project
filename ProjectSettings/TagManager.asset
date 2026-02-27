@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - ObjectToCollide
+  - aggro
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - Ceiling
   - Obstacle
-  - 
-  - 
+  - player
+  - decoy
   - 
   - 
   - 
