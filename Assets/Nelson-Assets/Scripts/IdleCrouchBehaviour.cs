@@ -23,7 +23,19 @@ public class IdleCrouchBehaviour : StateMachineBehaviour
     {
           animator.SetBool("isCrouchWalking", true);
     }
+        if (Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("isCrouchWalking", true);
         }
+        if (Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool("isCrouchWalking", true);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("isCrouchWalking", true);
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

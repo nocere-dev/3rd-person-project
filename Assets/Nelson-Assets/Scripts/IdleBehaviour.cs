@@ -13,7 +13,19 @@ public class IdleBehaviour : StateMachineBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isWalking", true);
+            animator.SetBool("isWalkng", true);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool("isWalkng", true);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("isWalkng", true);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("isWalkng", true);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

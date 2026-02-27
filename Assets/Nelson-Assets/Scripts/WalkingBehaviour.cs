@@ -12,7 +12,19 @@ public class WalikingBehaviour : StateMachineBehaviour
           {
           if (Input.GetKeyUp(KeyCode.W))
         {
-            animator.SetBool("isWalking", false);
+            animator.SetBool("isWalkng", false);
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            animator.SetBool("isWalkng", false);
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            animator.SetBool("isWalkng", false);
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            animator.SetBool("isWalkng", false);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

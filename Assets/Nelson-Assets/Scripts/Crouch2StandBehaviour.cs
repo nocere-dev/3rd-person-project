@@ -13,11 +13,23 @@ public class Crouch2StandBehaviour : StateMachineBehaviour
    {
       if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isWalking" , false);
+            animator.SetBool("isWalkng" , true);
         }
-     else
+        if (Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool("isWalkng", true);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("isWalkng", true);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            animator.SetBool("isWalkng", true);
+        }
+        else
     {
-    animator.SetBool("isWalking", true);
+        animator.SetBool("isWalkng", false);
     }
          }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

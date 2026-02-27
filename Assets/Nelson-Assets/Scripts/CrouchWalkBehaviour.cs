@@ -13,7 +13,19 @@ public class CrouchWalkBehaviour : StateMachineBehaviour
         {
             animator.SetBool("isCrouchWalking" , false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                animator.SetBool("isCrouchWalking", false);
+            }
+            if (Input.GetKeyUp(KeyCode.S))
+            {
+                animator.SetBool("isCrouchWalking", false);
+            }
+            if (Input.GetKeyUp(KeyCode.D))
+            {
+                animator.SetBool("isCrouchWalking", false);
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
      {
             animator.SetTrigger("isJumping");
         }
