@@ -10,6 +10,8 @@ public class toolblet : MonoBehaviour
 
     public Tools[] assassin_belt;
 
+    public LayerMask playerLayer;
+
     [SerializeField] private int selectedToolIndex = 0;
     
     void Start()
@@ -20,36 +22,33 @@ public class toolblet : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             selectedToolIndex = (selectedToolIndex + 1) % assassin_belt.Length;
             toolNameText.text = assassin_belt[selectedToolIndex].name;
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
-        }       
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Throw(selectedToolIndex);
+        }     
     }
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Throw(selectedToolIndex);
-        }
+        
     }
 
     void Throw(int toolIndex)
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 1, 0));
         RaycastHit hit;
 
-        bool hasHit = Physics.Raycast(ray, out hit, 100f);
+        bool hasHit = Physics.Raycast(ray, out hit, 100f, ~playerLayer);
 
         Vector3 spawnPosition = throwPoint.position;
         Vector3 throwDirection = ray.direction;
-
-        if (hasHit)
-        {
-            throwDirection = (hit.point + throwPoint.position).normalized;
-        }
 
         GameObject thrownTool = Instantiate(assassin_belt[toolIndex].toolPrefab, spawnPosition, Quaternion.identity);
         Rigidbody toolRb = thrownTool.GetComponent<Rigidbody>();
