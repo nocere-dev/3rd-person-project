@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dbbc15cebe6b404596b95e5c5c5ed16, type: 3}
-  m_Name: test
+  m_Name: hand
   m_EditorClassIdentifier: Assembly-CSharp::Tools
-  throwSpeed: 20
-  toolPrefab: {fileID: 4302187508064471406, guid: a2997ee7e9b4d264c85f989b8f88ef5b, type: 3}
+  throwSpeed: 0
+  toolPrefab: {fileID: 0}
   toolRb: {fileID: 0}
