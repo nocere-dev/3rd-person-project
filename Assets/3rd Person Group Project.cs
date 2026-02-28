@@ -154,6 +154,15 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""d22359f9-e69d-4b09-a900-e5f676863dca"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -418,6 +427,17 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25634174-3e33-426c-a0df-7d36b80acfe4"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1012,6 +1032,7 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_switch = m_Player.FindAction("switch", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1112,6 +1133,7 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_switch;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1151,6 +1173,10 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
         /// Provides access to the underlying input action "Player/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/switch".
+        /// </summary>
+        public InputAction @switch => m_Wrapper.m_Player_switch;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1198,6 +1224,9 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @switch.started += instance.OnSwitch;
+            @switch.performed += instance.OnSwitch;
+            @switch.canceled += instance.OnSwitch;
         }
 
         /// <summary>
@@ -1230,6 +1259,9 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @switch.started -= instance.OnSwitch;
+            @switch.performed -= instance.OnSwitch;
+            @switch.canceled -= instance.OnSwitch;
         }
 
         /// <summary>
@@ -1579,6 +1611,13 @@ public partial class @_3rdPersonGroupProject: IInputActionCollection2, IDisposab
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "switch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitch(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

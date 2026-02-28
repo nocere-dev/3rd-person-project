@@ -209,8 +209,8 @@ public class Enemy : MonoBehaviour
         enemyState = EnemyState.Moving;
     }
 
-    //------------------Ollie additions-----------------------------
-
+    
+    //detects colliders entering the hearing range
     private void earRadius()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, hearingRange, decoyMask);
@@ -224,13 +224,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    //move towards whatever has caught their attention
     private void investigateMove()
     {
-        TurnToFace(lastDecoyPos);
+        Vector3 targetPos = new Vector3(lastDecoyPos.x, transform.position.y, lastDecoyPos.z);
+        
+        TurnToFace(targetPos);
 
-        transform.position = Vector3.MoveTowards(transform.position, lastDecoyPos, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if((transform.position - lastDecoyPos).sqrMagnitude <= arriveDistance * arriveDistance)
+        if((transform.position - targetPos).sqrMagnitude <= arriveDistance * arriveDistance)
         {
             distracted = false;
             enemyState = EnemyState.Moving;
@@ -241,7 +245,6 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, hearingRange);
     }
-    //------------------Ollie additions-----------------------------
 
     void OnDrawGizmos()
     {

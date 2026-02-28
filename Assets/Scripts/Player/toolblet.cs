@@ -22,7 +22,7 @@ public class toolblet : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             selectedToolIndex = (selectedToolIndex + 1) % assassin_belt.Length;
             toolNameText.text = assassin_belt[selectedToolIndex].name;
