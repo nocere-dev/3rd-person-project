@@ -64,7 +64,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 0
-  killRange: 2
+  killRange: 3
   canKill: 0
   speed: 5
   turnSpeed: 720
