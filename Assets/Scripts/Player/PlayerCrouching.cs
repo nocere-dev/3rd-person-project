@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerCrouching : MonoBehaviour
 {
     Player player;
+    CharacterController controller;
     PlayerInput playerInput;
     InputAction crouchAction;
 
@@ -23,6 +24,7 @@ public class PlayerCrouching : MonoBehaviour
     void Awake()
     {
         player = GetComponent<Player>();
+        controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         crouchAction = playerInput.actions["Crouch"];
     }
@@ -30,6 +32,7 @@ public class PlayerCrouching : MonoBehaviour
     void Start()
     {
         originalHeight = currentHeight = player.Height;
+        controller.center = new Vector3(0, 1, 0);
         crouchToggled = false;
     }
 
@@ -63,6 +66,10 @@ public class PlayerCrouching : MonoBehaviour
 
             player.Height = currentHeight;
         }
+
+        controller.center = IsCrouching
+            ? new Vector3(0, currentHeight / 2, 0)
+            : new Vector3(0, 1, 0);
 
         if(IsCrouching)
         {
