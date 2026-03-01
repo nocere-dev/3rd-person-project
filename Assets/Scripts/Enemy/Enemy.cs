@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum EnemyMoveType
 {
@@ -44,13 +45,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Light spotLight;
     [SerializeField] private float viewDistance;
     private float viewAngle;
-    //------------------Ollie additions-----------------------------
-    [SerializeField] private float hearingRange;
-    private bool distracted;
-    private Vector3 lastDecoyPos;
-    [SerializeField] private LayerMask decoyMask;
-    //------------------Ollie additions-----------------------------
     
+    [SerializeField] private float hearingRange;
+    private Vector3 lastDecoyPos;
+    private bool distracted;
+    [SerializeField] private LayerMask decoyMask;
+    
+    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private float killRange = 3;
+    private GameObject target;
+    public bool canKill;
 
     [Header("Movement Settings")]
     [SerializeField] private float speed = 2f;
@@ -81,9 +85,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
  
+        KillPlayer();
+        
         if (CanSeePlayer())
         {
             spotLight.color = Color.red;
+            exterminate();
         }
         else
         {
@@ -209,8 +216,8 @@ public class Enemy : MonoBehaviour
         enemyState = EnemyState.Moving;
     }
 
-    //------------------Ollie additions-----------------------------
-
+    
+    //detects colliders entering the hearing range
     private void earRadius()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, hearingRange, decoyMask);
@@ -224,24 +231,63 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    //move towards whatever has caught their attention
     private void investigateMove()
     {
-        TurnToFace(lastDecoyPos);
+        Vector3 targetPos = new Vector3(lastDecoyPos.x, transform.position.y, lastDecoyPos.z);
+        
+        TurnToFace(targetPos);
 
-        transform.position = Vector3.MoveTowards(transform.position, lastDecoyPos, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if((transform.position - lastDecoyPos).sqrMagnitude <= arriveDistance * arriveDistance)
+        if((transform.position - targetPos).sqrMagnitude <= arriveDistance * arriveDistance)
         {
             distracted = false;
             enemyState = EnemyState.Moving;
         }
     }
+
+    //checks to see if it can kill the player
+    private void KillPlayer()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, killRange, playerMask);
+
+        if(colliders.Length > 0)
+        {
+            canKill = true;
+            target = colliders[0].gameObject;
+            
+        }
+        else
+        {
+            canKill = false;
+            target = null;
+        }
+        
+    }
+
+    private void exterminate()
+    {
+        if(canKill && target != null)
+        {
+            Destroy(target);
+
+            canKill = false;
+            
+            SceneManager.LoadScene("Scenes/You Died");
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, hearingRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, killRange);
     }
-    //------------------Ollie additions-----------------------------
+
 
     void OnDrawGizmos()
     {

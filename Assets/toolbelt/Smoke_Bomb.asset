@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbbc15cebe6b404596b95e5c5c5ed16, type: 3}
+  m_Name: Smoke_Bomb
+  m_EditorClassIdentifier: Assembly-CSharp::Tools
+  throwSpeed: 3
+  toolPrefab: {fileID: 3461902486751342242, guid: 286aa239dc298aa47a32f8a4f1a0e6d6, type: 3}
+  toolRb: {fileID: 0}
