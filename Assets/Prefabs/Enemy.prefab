@@ -61,6 +61,11 @@ MonoBehaviour:
   decoyMask:
     serializedVersion: 2
     m_Bits: 512
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  killRange: 2
+  canKill: 0
   speed: 5
   turnSpeed: 720
   waitTime: 1
