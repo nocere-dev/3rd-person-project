@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum EnemyMoveType
 {
@@ -256,12 +257,14 @@ public class Enemy : MonoBehaviour
         {
             canKill = true;
             target = colliders[0].gameObject;
+            SceneManager.LoadScene("Scenes/You Died");
         }
         else
         {
             canKill = false;
             target = null;
         }
+        
     }
 
     private void exterminate()

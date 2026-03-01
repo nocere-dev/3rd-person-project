@@ -7,4 +7,9 @@ public class TryAgain : MonoBehaviour
     {
         SceneManager.LoadScene("GreyBox");
     }
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }
