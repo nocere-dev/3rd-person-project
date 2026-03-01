@@ -257,7 +257,7 @@ public class Enemy : MonoBehaviour
         {
             canKill = true;
             target = colliders[0].gameObject;
-            SceneManager.LoadScene("Scenes/You Died");
+            
         }
         else
         {
@@ -274,6 +274,8 @@ public class Enemy : MonoBehaviour
             Destroy(target);
 
             canKill = false;
+            
+            SceneManager.LoadScene("Scenes/You Died");
         }
     }
 
