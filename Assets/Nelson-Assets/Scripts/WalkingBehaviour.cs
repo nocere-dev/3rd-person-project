@@ -30,7 +30,7 @@ public class WalikingBehaviour : StateMachineBehaviour
         {
             animator.SetTrigger("isJumping");
         }
-        if (Input.GetKey(KeyCode.C))
+         if (Input.GetKey(KeyCode.C))
         {
             animator.SetBool("isCrouched", true);
         }

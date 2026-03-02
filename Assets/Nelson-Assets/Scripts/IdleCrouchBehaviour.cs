@@ -11,9 +11,9 @@ public class IdleCrouchBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-     if (Input.GetKey(KeyCode.C))
+      if (Input.GetKey(KeyCode.C))
         {
-            animator.SetBool("isCrouched" , false);
+            animator.SetBool("isCrouched", false);
         }
      if (Input.GetKeyDown(KeyCode.Space))
     {
