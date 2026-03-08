@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a50f9626aa1f04cb179e815f64e910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveType: 0
+  moveType: 1
   enemyClass: 0
   pathHolder: {fileID: 0}
   player: {fileID: 0}
@@ -63,13 +63,12 @@ MonoBehaviour:
     m_Bits: 512
   playerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   killRange: 3
-  canKill: 0
-  speed: 5
-  turnSpeed: 720
-  waitTime: 1
-  arriveDistance: 0.5
+  speed: 3
+  turnSpeed: 400
+  waitTime: 2
+  arriveDistance: 0.05
 --- !u!136 &-4781442774740553991
 CapsuleCollider:
   m_ObjectHideFlags: 0
