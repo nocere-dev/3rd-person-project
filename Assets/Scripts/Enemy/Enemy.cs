@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.Mathematics;
+using UnityEngine.AI;
+using System.Threading;
 
 public enum EnemyMoveType
 {
@@ -23,7 +26,8 @@ public enum EnemyState
     Moving, 
     Chasing,
     Alerted,
-    Investigating
+    Investigating,
+    Searching
 }
 
 public class Enemy : MonoBehaviour
@@ -50,29 +54,42 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float detectionTime = 2f;
     [SerializeField] private float detectionDecayRate = 1f;
     [SerializeField] private Image detectionIcon;
+    [SerializeField] private GameObject lastKnownMarkerPrefab;
+    private GameObject currentMarker;
     private float detectionMeter = 0f;
  
     [Space]
     [Header("Movement Settings")]
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float turnSpeed = 720f;
+    private NavMeshAgent agent;
     [SerializeField] private float waitTime = 1f;
-    [SerializeField] private float arriveDistance = 0.5f;
    
+    [Space]
+    [Header("Search Settings")]
+    [SerializeField] private float searchTime = 2f;
     private float viewAngle;
     private Color defaultLightColour;
 
     private Vector3[] waypoints;
     private int targetIndex;
+
     private float waitTimer;
+    private float searchTimer;
+
     private Vector3 lastDecoyPos;
     private EnemyState enemyState = EnemyState.Moving;
+    private Vector3 lastKnownPlayerPos;
     private bool distracted;
     
     private GameObject killTarget;
 
+    private ParticleSystem decoyParticles;
+    private float distractedTimer;
+    private bool reachedDecoy = false;
+    private bool reachedSearchPoint = false;
+
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         defaultLightColour = spotLight.color;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         viewAngle = spotLight.spotAngle;
@@ -92,18 +109,37 @@ public class Enemy : MonoBehaviour
             detectionMeter = Mathf.Clamp01(detectionMeter);
             spotLight.color = Color.Lerp(defaultLightColour, Color.red, detectionMeter);
 
-            if (detectionMeter >= 1f)
-                enemyState = EnemyState.Alerted;
+            if (detectionMeter >= 1f && enemyState != EnemyState.Chasing)
+            {
+                enemyState = EnemyState.Chasing;
+                TryKillPlayer();
+            }
         }
         else
         {
             detectionMeter -= Time.deltaTime / detectionDecayRate;
             detectionMeter = Mathf.Clamp01(detectionMeter);
             spotLight.color = Color.Lerp(defaultLightColour, Color.red, detectionMeter);
+
+            if (enemyState == EnemyState.Chasing)
+            {
+                lastKnownPlayerPos = player.position;
+                searchTimer = searchTime;
+                enemyState = EnemyState.Searching;
+
+                if (currentMarker != null) Destroy(currentMarker);
+                currentMarker = Instantiate(lastKnownMarkerPrefab, lastKnownPlayerPos, quaternion.identity);
+            }
         }
 
         UpdateDetectionUI();
         
+        switch (enemyState)
+        {
+            case EnemyState.Chasing:        ChasePlayer();      return;
+            case EnemyState.Searching:      SearchMove();       return;
+            case EnemyState.Investigating:  InvestigateMove();  return;
+        }
         if (moveType != EnemyMoveType.Patroling) return; // Checks enemy move type is patrolling type
 
         // If there are no waypoints/path holders created or waypoint count is less than 2 do nothing
@@ -113,21 +149,22 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        CheckHearingRange();
-
         switch (enemyState)
         {
-            case EnemyState.Investigating:  InvestigateMove();  break;
             case EnemyState.Moving:         PatrolMove();       break;
             default:                        PatrolWait();       break;
         }
-    }
+ 
+        if (!distracted)
+            CheckHearingRange();
+   }
 
     /// ------------------------------
     /// Detection
     /// ------------------------------
     bool CanSeePlayer()
     {
+        if (player.GetComponent<Player>().isHidden) return false;
         
         if (Vector3.Distance(transform.position, player.position) >= viewDistance)
             return false;
@@ -138,7 +175,7 @@ public class Enemy : MonoBehaviour
         if (angleToPlayer >= viewAngle / 2f)
             return false;
         
-        return !Physics.Linecast(eyePosition.position, player.position, viewMask);
+        return !Physics.Raycast(eyePosition.position, dirToPlayer, viewDistance, viewMask, QueryTriggerInteraction.Collide);
     }
 
     //detects colliders entering the hearing range
@@ -146,10 +183,13 @@ public class Enemy : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, hearingRange, decoyMask);
 
-        if (colliders.Length > 0)
+        if (colliders.Length > 0 && enemyState != EnemyState.Chasing)
         {
             distracted = true;
             lastDecoyPos = colliders[0].transform.position;
+            
+            decoyParticles = colliders[0].GetComponent<ParticleSystem>();
+            distractedTimer = decoyParticles != null ? decoyParticles.main.duration : 3f;
             enemyState = EnemyState.Investigating;
             Debug.Log("HUUUUUUUUUUUUUUUUUUUUUHHHHHHHHH");
         }
@@ -164,6 +204,12 @@ public class Enemy : MonoBehaviour
     /// ------------------------------
     /// Combat
     /// ------------------------------
+    private void ChasePlayer()
+    {
+       lastKnownPlayerPos = player.position;
+       agent.SetDestination(player.position);
+    }
+
     private void CheckKillRange()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, killRange, playerMask);
@@ -187,7 +233,7 @@ public class Enemy : MonoBehaviour
         // If waypoints are null do nothing
         if (waypoints == null || waypoints.Length == 0) return;
 
-        transform.position = waypoints[0]; // Snap enemy to first waypoint
+        agent.Warp(waypoints[0]);
 
         targetIndex = (waypoints.Length > 1) ? 1 : 0;
 
@@ -216,22 +262,20 @@ public class Enemy : MonoBehaviour
 
     private void PatrolMove()
     {
-        // Set current waypoint to the enemies next target position
-        Vector3 target = waypoints[targetIndex];
+        agent.SetDestination(waypoints[targetIndex]);
 
-        TurnToFace(target);
-
-        // Move enemy towards next target that was set above
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        // Check if the enemy is close enough to the target waypoint to consider it as "arrived"
-        // Squared distance instead of Vector3.Distance as it's cheaper
-        if ((transform.position - target).sqrMagnitude <= arriveDistance * arriveDistance)
+        if (HasArrived())
         {
-            transform.position = target; // Snap enemy to target point to avoid floating point inaccuracy
             waitTimer = waitTime;
             enemyState = EnemyState.Waiting;
         }
+    }
+
+    private bool HasArrived()
+    {
+        return !agent.pathPending 
+        && agent.remainingDistance <= agent.stoppingDistance
+        && agent.velocity.sqrMagnitude == 0f;
     }
 
     private void PatrolWait()
@@ -247,30 +291,50 @@ public class Enemy : MonoBehaviour
     //move towards whatever has caught their attention
     private void InvestigateMove()
     {
-        Vector3 targetPos = new Vector3(lastDecoyPos.x, transform.position.y, lastDecoyPos.z);
-        
-        TurnToFace(targetPos);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        agent.SetDestination(lastDecoyPos);
 
-        if((transform.position - targetPos).sqrMagnitude <= arriveDistance * arriveDistance)
+        if (HasArrived() && !reachedDecoy)
         {
-            distracted = false;
-            enemyState = EnemyState.Moving;
+            reachedDecoy = true;
+            agent.ResetPath();
         }
-    }
+        if (reachedDecoy)
+        {
+            transform.eulerAngles += Vector3.up * 60f * Time.deltaTime;
+            distractedTimer -= Time.deltaTime;
+            if (distractedTimer <= 0f)
+            {
+                distracted = false;
+                reachedDecoy = false;
+                enemyState = EnemyState.Moving;
+            }
+            
+        }
+   }
 
-    /// ------------------------------
-    /// Utility
-    /// ------------------------------
-
-    private void TurnToFace(Vector3 lookTarget)
+    private void SearchMove()
     {
-        Vector3 dirToLook = (lookTarget - transform.position).normalized;
-        float targetAngle = 90 - MathF.Atan2(dirToLook.z, dirToLook.x) * Mathf.Rad2Deg;
+        agent.SetDestination(lastKnownPlayerPos);
 
-        float newAngle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, turnSpeed * Time.deltaTime);
-        
-        transform.eulerAngles = Vector3.up * newAngle;
+        if (HasArrived() && !reachedSearchPoint)
+        {
+            reachedSearchPoint = true;
+            agent.ResetPath();
+        }
+
+        if (reachedSearchPoint)
+        {
+            transform.eulerAngles += Vector3.up * 60f * Time.deltaTime;
+            searchTimer -= Time.deltaTime;
+
+            if (searchTimer <= 0f)
+            {
+                detectionMeter = 0f;
+                reachedSearchPoint = false;
+                enemyState = EnemyState.Moving;
+                if (currentMarker != null) Destroy(currentMarker);
+            }
+        }
     }
 
     /// ------------------------------

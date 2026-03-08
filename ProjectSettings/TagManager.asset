@@ -16,10 +16,10 @@ TagManager:
   - UI
   - Ceiling
   - Obstacle
-  - player
-  - decoy
-  - enemy
-  - 
+  - Player
+  - Decoy
+  - Enemy
+  - Floor
   - 
   - 
   - 
