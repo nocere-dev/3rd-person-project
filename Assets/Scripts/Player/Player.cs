@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
 
+    public bool isHidden = false;
+
     public float Height
     {
         get => controller.height;
