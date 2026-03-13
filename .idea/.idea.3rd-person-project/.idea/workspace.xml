@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/TexturedStraightWallPiece.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/TexturedStraightWallPiece.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/BrickWallTile.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/BrickWallTile.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/RedConcrete.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/RedConcrete.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/RoofTiles.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/RoofTiles.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_BaseMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_BaseMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_MaskMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_MaskMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Brick Wall Tile_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_BaseMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_BaseMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_MaskMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_MaskMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Red concrete_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_BaseMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_BaseMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_MaskMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_MaskMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Roof Tiles_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_BaseMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_BaseMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_MaskMap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_MaskMap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_Normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/TexturedStraightWallPiece_Tiles Black Stone_Normal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/Topbit.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Environment/Wall/Textures/Topbit.mat.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +148,7 @@
       <workItem from="1772066324851" duration="115000" />
       <workItem from="1772118172689" duration="194000" />
       <workItem from="1772376831174" duration="3638000" />
+      <workItem from="1773401891662" duration="91000" />
     </task>
     <servers />
   </component>
