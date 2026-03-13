@@ -6,17 +6,23 @@ public class toolblet : MonoBehaviour
 {
     public TextMeshProUGUI toolNameText;
 
+    public TextMeshProUGUI toolUses;
+
     public Transform throwPoint;
 
     public Tools[] assassin_belt;
 
     public LayerMask playerLayer;
 
+    public int toolAmount = 3;
+
     [SerializeField] private int selectedToolIndex = 0;
     
     void Start()
     {
         toolNameText.text = assassin_belt[selectedToolIndex].name;
+
+        
     }
 
     
@@ -29,10 +35,13 @@ public class toolblet : MonoBehaviour
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&& toolAmount > 0)
         {
             Throw(selectedToolIndex);
-        }     
+        }
+        
+        toolUses.text = toolAmount.ToString();
+
     }
 
     void FixedUpdate()
@@ -42,6 +51,11 @@ public class toolblet : MonoBehaviour
 
     void Throw(int toolIndex)
     {
+        if(assassin_belt[selectedToolIndex].name != "hand")
+        {
+            toolAmount = toolAmount - 1;
+        }
+        
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 1, 0));
         RaycastHit hit;
 
