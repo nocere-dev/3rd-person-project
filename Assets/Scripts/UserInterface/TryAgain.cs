@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TryAgain : MonoBehaviour
-{
-    public void TryAgainButton()
-    {
-        SceneManager.LoadScene("GreyBox");
-    }
-    void Start()
-    {
+public class TryAgain : MonoBehaviour {
+    private void Start() {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void TryAgainButton() {
+        SceneManager.LoadScene("GreyBox");
     }
 }

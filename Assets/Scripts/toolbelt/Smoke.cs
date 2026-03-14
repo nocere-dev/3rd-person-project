@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class Smoke : MonoBehaviour
-{
-    void OnTriggerEnter(Collider other)
-    {
+public class Smoke : MonoBehaviour {
+    private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
             other.GetComponent<Player>().isHidden = true;
     }
 
-    void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player"))
             other.GetComponent<Player>().isHidden = false;
     }
