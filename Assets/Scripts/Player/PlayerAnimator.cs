@@ -4,7 +4,7 @@
 [RequireComponent(typeof(PlayerCrouching))]
 public class PlayerAnimator : MonoBehaviour {
     // Cached hashes - matching your existing typo "isWalkng" so nothing breaks in the Animator
-    private static readonly int IsWalking = Animator.StringToHash("isWalkng");
+    private static readonly int IsWalking = Animator.StringToHash("isWalking");
     private static readonly int IsCrouched = Animator.StringToHash("isCrouched");
     private static readonly int IsCrouchWalking = Animator.StringToHash("isCrouchWalking");
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
