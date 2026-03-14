@@ -1,40 +1,18 @@
 using UnityEngine;
 
-public class IdleCrouchBehaviour : StateMachineBehaviour
-{
+public class IdleCrouchBehaviour : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-      if (Input.GetKey(KeyCode.C))
-        {
-            animator.SetBool("isCrouched", false);
-        }
-     if (Input.GetKeyDown(KeyCode.Space))
-    {
-            animator.SetTrigger("isJumping");
-     }
-     if (Input.GetKey(KeyCode.W))
-    {
-          animator.SetBool("isCrouchWalking", true);
-    }
-        if (Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isCrouchWalking", true);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            animator.SetBool("isCrouchWalking", true);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            animator.SetBool("isCrouchWalking", true);
-        }
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        if (Input.GetKey(KeyCode.C)) animator.SetBool("isCrouched", false);
+        if (Input.GetKeyDown(KeyCode.Space)) animator.SetTrigger("isJumping");
+        if (Input.GetKey(KeyCode.W)) animator.SetBool("isCrouchWalking", true);
+        if (Input.GetKey(KeyCode.A)) animator.SetBool("isCrouchWalking", true);
+        if (Input.GetKey(KeyCode.S)) animator.SetBool("isCrouchWalking", true);
+        if (Input.GetKey(KeyCode.D)) animator.SetBool("isCrouchWalking", true);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

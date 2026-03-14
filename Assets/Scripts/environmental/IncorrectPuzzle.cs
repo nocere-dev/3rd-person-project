@@ -1,41 +1,40 @@
 using UnityEngine;
 
-public class IncorrectPuzzle : MonoBehaviour
-{
-    
+public class IncorrectPuzzle : MonoBehaviour {
     [Header("UI")] public GameObject pressEUI;
     [Header("UI")] public GameObject Wrong;
     public Color interactColor = Color.red;
     public Renderer PlaneRenderer;
-    
-    private bool playerInRange = false;
+
+    private bool playerInRange;
 
 
-
-
-    private void Start()
-    {
+    private void Start() {
         if (Wrong != null)
             Wrong.SetActive(false);
         if (pressEUI != null)
             pressEUI.SetActive(false);
     }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
+
+    private void Update() {
+        if (playerInRange && Input.GetKeyDown(KeyCode.E)) {
+            Interact();
+            if (Wrong != null)
+                Wrong.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
             playerInRange = true;
 
             if (pressEUI != null)
                 pressEUI.SetActive(true);
         }
     }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
+
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
             playerInRange = false;
 
             if (pressEUI != null)
@@ -44,22 +43,11 @@ public class IncorrectPuzzle : MonoBehaviour
                 Wrong.SetActive(false);
         }
     }
-    private void Update()
-    {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-            if (Wrong != null)
-                Wrong.SetActive(true);
-        }
-    }
-    
-    private void Interact()
-    {
 
+    private void Interact() {
         if (PlaneRenderer != null)
             PlaneRenderer.material.color = interactColor;
-        
+
         if (pressEUI != null)
             pressEUI.SetActive(false);
 

@@ -1,35 +1,18 @@
 using UnityEngine;
 
-public class CrouchWalkBehaviour : StateMachineBehaviour
-{
+public class CrouchWalkBehaviour : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
- 
+
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-     {
-         if (Input.GetKeyUp(KeyCode.W))
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         {
-            animator.SetBool("isCrouchWalking" , false);
+            if (Input.GetKeyUp(KeyCode.W)) animator.SetBool("isCrouchWalking", false);
+            if (Input.GetKeyUp(KeyCode.A)) animator.SetBool("isCrouchWalking", false);
+            if (Input.GetKeyUp(KeyCode.S)) animator.SetBool("isCrouchWalking", false);
+            if (Input.GetKeyUp(KeyCode.D)) animator.SetBool("isCrouchWalking", false);
+            if (Input.GetKeyDown(KeyCode.Space)) animator.SetTrigger("isJumping");
         }
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                animator.SetBool("isCrouchWalking", false);
-            }
-            if (Input.GetKeyUp(KeyCode.S))
-            {
-                animator.SetBool("isCrouchWalking", false);
-            }
-            if (Input.GetKeyUp(KeyCode.D))
-            {
-                animator.SetBool("isCrouchWalking", false);
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-     {
-            animator.SetTrigger("isJumping");
-        }
-      }  
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

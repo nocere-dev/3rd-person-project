@@ -2,65 +2,60 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Player))]
-public class PlayerCrouching : MonoBehaviour
-{
-    Player player;
-    CharacterController controller;
-    PlayerInput playerInput;
-    InputAction crouchAction;
+public class PlayerCrouching : MonoBehaviour {
+    [Header("Crouching Settings")] [SerializeField]
+    private float crouchHeight = 1f;
 
-    [Header("Crouching Settings")]
-    [SerializeField] private float crouchHeight = 1f;
     [SerializeField] private float crouchTransitionSpeed = 5f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
-
-    private float currentHeight;
-    private float originalHeight;
+    private CharacterController controller;
+    private InputAction crouchAction;
 
     private bool crouchToggled;
 
-    bool IsCrouching => originalHeight - currentHeight > 0.1f;
+    private float currentHeight;
+    private float originalHeight;
+    private Player player;
+    private PlayerInput playerInput;
 
-    void Awake()
-    {
+    public bool IsCrouching => originalHeight - currentHeight > 0.1f;
+
+    private void Awake() {
         player = GetComponent<Player>();
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         crouchAction = playerInput.actions["Crouch"];
     }
 
-    void Start()
-    {
+    private void Start() {
         originalHeight = currentHeight = player.Height;
         controller.center = new Vector3(0, 1, 0);
         crouchToggled = false;
     }
 
-    void OnEnable() => player.OnBeforeMove += OnBeforeMove;
-    void OnDisable() => player.OnBeforeMove -= OnBeforeMove;
+    private void OnEnable() {
+        player.OnBeforeMove += OnBeforeMove;
+    }
 
-    void OnBeforeMove()
-    {
+    private void OnDisable() {
+        player.OnBeforeMove -= OnBeforeMove;
+    }
+
+    private void OnBeforeMove() {
         var requestCrouch = crouchAction.WasPressedThisFrame();
-        if (requestCrouch)
-        {
-            crouchToggled = !crouchToggled;
-        }
+        if (requestCrouch) crouchToggled = !crouchToggled;
 
         var heightTarget = crouchToggled ? crouchHeight : originalHeight;
 
-        if (IsCrouching && !crouchToggled)
-        {
+        if (IsCrouching && !crouchToggled) {
             var castOrigin = transform.position + new Vector3(0, currentHeight / 2, 0);
-            if (Physics.Raycast(castOrigin, Vector3.up, out var hit, 0.2f))
-            {
+            if (Physics.Raycast(castOrigin, Vector3.up, out var hit, 0.2f)) {
                 var distanceToCeiling = hit.point.y - castOrigin.y;
                 heightTarget = Mathf.Max(heightTarget + distanceToCeiling - 0.1f, crouchHeight);
             }
         }
 
-        if (!Mathf.Approximately(heightTarget, currentHeight))
-        {
+        if (!Mathf.Approximately(heightTarget, currentHeight)) {
             var crouchDelta = Time.deltaTime * crouchTransitionSpeed;
             currentHeight = Mathf.Lerp(currentHeight, heightTarget, crouchDelta);
 
@@ -71,9 +66,6 @@ public class PlayerCrouching : MonoBehaviour
             ? new Vector3(0, currentHeight / 2, 0)
             : new Vector3(0, 1, 0);
 
-        if(IsCrouching)
-        {
-            player.movementSpeedMultiplier = crouchSpeedMultiplier;
-        }
+        if (IsCrouching) player.movementSpeedMultiplier = crouchSpeedMultiplier;
     }
 }
