@@ -18,7 +18,7 @@ public class PlayerCrouching : MonoBehaviour {
     private Player player;
     private PlayerInput playerInput;
 
-    public bool IsCrouching => originalHeight - currentHeight > 0.1f;
+    public bool isCrouching => originalHeight - currentHeight > 0.1f;
 
     private void Awake() {
         player = GetComponent<Player>();
@@ -47,7 +47,7 @@ public class PlayerCrouching : MonoBehaviour {
 
         var heightTarget = crouchToggled ? crouchHeight : originalHeight;
 
-        if (IsCrouching && !crouchToggled) {
+        if (isCrouching && !crouchToggled) {
             var castOrigin = transform.position + new Vector3(0, currentHeight / 2, 0);
             if (Physics.Raycast(castOrigin, Vector3.up, out var hit, 0.2f)) {
                 var distanceToCeiling = hit.point.y - castOrigin.y;
@@ -62,10 +62,10 @@ public class PlayerCrouching : MonoBehaviour {
             player.Height = currentHeight;
         }
 
-        controller.center = IsCrouching
+        controller.center = isCrouching
             ? new Vector3(0, currentHeight / 2, 0)
             : new Vector3(0, 1, 0);
 
-        if (IsCrouching) player.movementSpeedMultiplier = crouchSpeedMultiplier;
+        if (isCrouching) player.movementSpeedMultiplier = crouchSpeedMultiplier;
     }
 }
