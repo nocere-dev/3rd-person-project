@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private EnemyClass enemyClass;
     [SerializeField] private Transform pathHolder;
     [SerializeField] private Transform player;
+    private Player playerComponent;
     public Transform eyePosition;
     [SerializeField] private LayerMask viewMask;
 
@@ -83,7 +84,7 @@ public class Enemy : MonoBehaviour {
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         defaultLightColour = spotLight.color;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        TryCachePlayerReference();
         viewAngle = spotLight.spotAngle;
 
         CacheWaypoints(); // Cache waypoints into an array on start 
@@ -110,7 +111,7 @@ public class Enemy : MonoBehaviour {
             spotLight.color = Color.Lerp(defaultLightColour, Color.red, detectionMeter);
 
             if (enemyState == EnemyState.Chasing) {
-                lastKnownPlayerPos = player.position;
+                lastKnownPlayerPos = player != null ? player.position : transform.position;
                 searchTimer = searchTime;
                 enemyState = EnemyState.Searching;
 
@@ -182,7 +183,10 @@ public class Enemy : MonoBehaviour {
     /// Detection
     /// ------------------------------
     private bool CanSeePlayer() {
-        if (player.GetComponent<Player>().isHidden) return false;
+        if (!TryCachePlayerReference()) return false;
+        if (playerComponent.isHidden) return false;
+
+        if (eyePosition == null) return false;
 
         if (Vector3.Distance(transform.position, player.position) >= viewDistance)
             return false;
@@ -221,6 +225,7 @@ public class Enemy : MonoBehaviour {
     /// Combat
     /// ------------------------------
     private void ChasePlayer() {
+        if (!TryCachePlayerReference()) return;
         lastKnownPlayerPos = player.position;
         agent.SetDestination(player.position);
     }
@@ -332,5 +337,23 @@ public class Enemy : MonoBehaviour {
                 if (currentMarker != null) Destroy(currentMarker);
             }
         }
+    }
+
+    // Keep runtime references valid even if player spawns late or is replaced.
+    private bool TryCachePlayerReference() {
+        if (player == null) {
+            var taggedPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (taggedPlayer != null) player = taggedPlayer.transform;
+        }
+
+        if (player == null) {
+            playerComponent = null;
+            return false;
+        }
+
+        if (playerComponent == null || playerComponent.transform != player)
+            playerComponent = player.GetComponent<Player>();
+
+        return playerComponent != null;
     }
 }
