@@ -26,7 +26,10 @@ public class Player : MonoBehaviour {
     private State _state;
 
     private CharacterController controller;
-
+    Animator animator;
+    
+    private PlayerCrouching crouching;
+    
     // Inputs
     private PlayerInput input;
     private InputAction jumpAction;
@@ -34,6 +37,8 @@ public class Player : MonoBehaviour {
     private Vector2 look;
     private InputAction lookAction;
     private InputAction moveAction;
+    
+    bool wasGrounded;
 
     internal float movementSpeedMultiplier;
     internal Vector3 velocity;
@@ -55,7 +60,9 @@ public class Player : MonoBehaviour {
 
     private void Awake() {
         controller = GetComponent<CharacterController>();
+        crouching = GetComponent<PlayerCrouching>();
         if (!input) input = GetComponent<PlayerInput>();
+        if (!animator) animator = GetComponentInChildren<Animator>();
         moveAction = input.actions["Move"];
         lookAction = input.actions["Look"];
         jumpAction = input.actions["Jump"];
@@ -93,13 +100,17 @@ public class Player : MonoBehaviour {
     private void UpdateMovement() {
         movementSpeedMultiplier = 1f;
         OnBeforeMove?.Invoke();
+        animator.SetBool("isWalking", false);
+
+        bool isGrounded = controller.isGrounded;
+        animator.SetBool("isGrounded", isGrounded);
 
         var moveInput = moveAction.ReadValue<Vector2>();
-        var input = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
-        input *= movementSpeed * movementSpeedMultiplier;
+        var moveVector = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+        moveVector *= movementSpeed * movementSpeedMultiplier;
 
-        if (input.magnitude > 0.1f) {
-            var targetAngle = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        if (moveVector.magnitude > 0.1f) {
+            var targetAngle = Mathf.Atan2(moveVector.x, moveVector.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
                 turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -107,18 +118,27 @@ public class Player : MonoBehaviour {
             var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             var targetVelocity = moveDir * (movementSpeed * movementSpeedMultiplier);
             CurrentVelocity = Vector3.Lerp(CurrentVelocity, targetVelocity, acceleration * Time.deltaTime);
-
-            if (jumpAction.WasPressedThisFrame() && controller.isGrounded) velocity.y += jumpSpeed;
+            
+            animator.SetBool("isWalking", true);
         }
         else {
             CurrentVelocity = Vector3.Lerp(CurrentVelocity, Vector3.zero, acceleration * Time.deltaTime);
         }
+        
+        var canJump = crouching == null || !crouching.IsCrouchActive;
+        if (jumpAction.WasPressedThisFrame() && isGrounded && canJump) {
+            animator.SetTrigger("Jump");
+            velocity.y += jumpSpeed;
+        }
+        
+        wasGrounded = isGrounded;
 
         controller.Move((CurrentVelocity + velocity) * Time.deltaTime);
     }
 
     private void UpdateClimbing() {
         var moveInput = moveAction.ReadValue<Vector2>();
+        animator.SetBool("isClimbing", moveInput.magnitude > 0.1f);
 
         if ((controller.isGrounded && moveInput.y < 0f) || jumpAction.WasPressedThisFrame()) {
             CurrentState = State.Walking;

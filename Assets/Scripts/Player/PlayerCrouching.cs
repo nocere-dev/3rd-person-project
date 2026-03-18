@@ -9,6 +9,7 @@ public class PlayerCrouching : MonoBehaviour {
     [SerializeField] private float crouchTransitionSpeed = 5f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     private CharacterController controller;
+    Animator animator;
     private InputAction crouchAction;
 
     private bool crouchToggled;
@@ -18,12 +19,14 @@ public class PlayerCrouching : MonoBehaviour {
     private Player player;
     private PlayerInput playerInput;
 
-    public bool isCrouching => originalHeight - currentHeight > 0.1f;
+    public bool IsCrouching => originalHeight - currentHeight > 0.1f;
+    public bool IsCrouchActive => crouchToggled || IsCrouching;
 
     private void Awake() {
         player = GetComponent<Player>();
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        if (!animator) animator = GetComponentInChildren<Animator>();
         crouchAction = playerInput.actions["Crouch"];
     }
 
@@ -43,11 +46,14 @@ public class PlayerCrouching : MonoBehaviour {
 
     private void OnBeforeMove() {
         var requestCrouch = crouchAction.WasPressedThisFrame();
-        if (requestCrouch) crouchToggled = !crouchToggled;
+        if (requestCrouch) {
+            crouchToggled = !crouchToggled;
+            animator.SetBool("isCrouching", crouchToggled);
+        };
 
         var heightTarget = crouchToggled ? crouchHeight : originalHeight;
 
-        if (isCrouching && !crouchToggled) {
+        if (IsCrouching && !crouchToggled) {
             var castOrigin = transform.position + new Vector3(0, currentHeight / 2, 0);
             if (Physics.Raycast(castOrigin, Vector3.up, out var hit, 0.2f)) {
                 var distanceToCeiling = hit.point.y - castOrigin.y;
@@ -62,10 +68,10 @@ public class PlayerCrouching : MonoBehaviour {
             player.Height = currentHeight;
         }
 
-        controller.center = isCrouching
+        controller.center = IsCrouching
             ? new Vector3(0, currentHeight / 2, 0)
             : new Vector3(0, 1, 0);
 
-        if (isCrouching) player.movementSpeedMultiplier = crouchSpeedMultiplier;
+        if (IsCrouching) player.movementSpeedMultiplier = crouchSpeedMultiplier;
     }
 }
