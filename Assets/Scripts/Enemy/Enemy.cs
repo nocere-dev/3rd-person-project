@@ -2,12 +2,16 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
+
+namespace Enemy {
 
 public enum EnemyMoveType {
     Static,
     Patroling
 }
+
 
 public enum EnemyClass {
     Light,
@@ -25,6 +29,7 @@ public enum EnemyState {
     Searching
 }
 
+[MovedFrom(true, sourceNamespace: "", sourceAssembly: "Assembly-CSharp", sourceClassName: "Enemy")]
 public class Enemy : MonoBehaviour {
     [Header("AI Settings")] [SerializeField]
     private EnemyMoveType moveType;
@@ -55,73 +60,82 @@ public class Enemy : MonoBehaviour {
     [Space] [Header("Search Settings")] [SerializeField]
     private float searchTime = 2f;
 
-    [Space] [Header("Movement Settings")] private NavMeshAgent agent;
+    [Space] [Header("Movement Settings")] private NavMeshAgent _agent;
 
-    private GameObject currentMarker;
+    private Player _playerComponent;
 
-    private ParticleSystem decoyParticles;
-    private Color defaultLightColour;
-    private float detectionMeter;
-    private bool distracted;
-    private float distractedTimer;
-    private EnemyState enemyState = EnemyState.Moving;
+    private GameObject _currentMarker;
 
-    private GameObject killTarget;
+    private ParticleSystem _decoyParticles;
+    private Color _defaultLightColour;
+    private float _detectionMeter;
+    private bool _distracted;
+    private float _distractedTimer;
+    private EnemyState _enemyState = EnemyState.Moving;
 
-    private Vector3 lastDecoyPos;
-    private Vector3 lastKnownPlayerPos;
-    private bool reachedDecoy;
-    private bool reachedSearchPoint;
-    private float searchTimer;
-    private int targetIndex;
-    private float viewAngle;
+    private GameObject _killTarget;
 
-    private float waitTimer;
+    private Vector3 _lastDecoyPos;
+    private Vector3 _lastKnownPlayerPos;
+    private bool _reachedDecoy;
+    private bool _reachedSearchPoint;
+    private float _searchTimer;
+    private int _targetIndex;
+    private float _viewAngle;
 
-    private Vector3[] waypoints;
+    private float _waitTimer;
+
+    private Vector3[] _waypoints;
+    private readonly Collider[] _hearingHits = new Collider[8];
+    private readonly Collider[] _killHits = new Collider[2];
 
     private void Start() {
-        agent = GetComponent<NavMeshAgent>();
-        defaultLightColour = spotLight.color;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        viewAngle = spotLight.spotAngle;
+        _agent = GetComponent<NavMeshAgent>();
+        _defaultLightColour = spotLight.color;
+        var playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null) {
+            player = playerObject.transform;
+            _playerComponent = playerObject.GetComponent<Player>();
+        }
+
+        _viewAngle = spotLight.spotAngle;
 
         CacheWaypoints(); // Cache waypoints into an array on start 
         InitPatrol();
-        distracted = false;
+        _distracted = false;
     }
 
     private void Update() {
         CheckKillRange();
 
         if (CanSeePlayer()) {
-            detectionMeter += Time.deltaTime / detectionTime;
-            detectionMeter = Mathf.Clamp01(detectionMeter);
-            spotLight.color = Color.Lerp(defaultLightColour, Color.red, detectionMeter);
+            _detectionMeter += Time.deltaTime / detectionTime;
+            _detectionMeter = Mathf.Clamp01(_detectionMeter);
+            spotLight.color = Color.Lerp(_defaultLightColour, Color.red, _detectionMeter);
 
-            if (detectionMeter >= 1f && enemyState != EnemyState.Chasing) {
-                enemyState = EnemyState.Chasing;
+            if (_detectionMeter >= 1f && _enemyState != EnemyState.Chasing) {
+                _enemyState = EnemyState.Chasing;
                 TryKillPlayer();
             }
         }
         else {
-            detectionMeter -= Time.deltaTime / detectionDecayRate;
-            detectionMeter = Mathf.Clamp01(detectionMeter);
-            spotLight.color = Color.Lerp(defaultLightColour, Color.red, detectionMeter);
+            _detectionMeter -= Time.deltaTime / detectionDecayRate;
+            _detectionMeter = Mathf.Clamp01(_detectionMeter);
+            spotLight.color = Color.Lerp(_defaultLightColour, Color.red, _detectionMeter);
 
-            if (enemyState == EnemyState.Chasing) {
-                lastKnownPlayerPos = player.position;
-                searchTimer = searchTime;
-                enemyState = EnemyState.Searching;
+            if (_enemyState == EnemyState.Chasing) {
+                _lastKnownPlayerPos = player.position;
+                _searchTimer = searchTime;
+                _enemyState = EnemyState.Searching;
 
-                if (currentMarker != null) Destroy(currentMarker);
-                currentMarker = Instantiate(lastKnownMarkerPrefab, lastKnownPlayerPos, quaternion.identity);
+                if (_currentMarker != null) Destroy(_currentMarker);
+                _currentMarker = Instantiate(lastKnownMarkerPrefab, _lastKnownPlayerPos, quaternion.identity);
             }
         }
 
         UpdateDetectionUI();
 
-        switch (enemyState) {
+        switch (_enemyState) {
             case EnemyState.Chasing:
                 ChasePlayer();
                 return;
@@ -136,17 +150,17 @@ public class Enemy : MonoBehaviour {
         if (moveType != EnemyMoveType.Patroling) return; // Checks enemy move type is patrolling type
 
         // If there are no waypoints/path holders created or waypoint count is less than 2 do nothing
-        if (waypoints == null || waypoints.Length < 2) {
+        if (_waypoints == null || _waypoints.Length < 2) {
             Debug.Log("Enemy patrol requires at least 2 waypoints.");
             return;
         }
 
-        switch (enemyState) {
+        switch (_enemyState) {
             case EnemyState.Moving: PatrolMove(); break;
             default: PatrolWait(); break;
         }
 
-        if (!distracted)
+        if (!_distracted)
             CheckHearingRange();
     }
 
@@ -182,7 +196,8 @@ public class Enemy : MonoBehaviour {
     /// Detection
     /// ------------------------------
     private bool CanSeePlayer() {
-        if (player.GetComponent<Player>().isHidden) return false;
+        if (player == null || _playerComponent == null) return false;
+        if (_playerComponent.isHidden) return false;
 
         if (Vector3.Distance(transform.position, player.position) >= viewDistance)
             return false;
@@ -190,7 +205,7 @@ public class Enemy : MonoBehaviour {
         var dirToPlayer = (player.position - transform.position).normalized;
 
         var angleToPlayer = Vector3.Angle(transform.forward, dirToPlayer);
-        if (angleToPlayer >= viewAngle / 2f)
+        if (angleToPlayer >= _viewAngle / 2f)
             return false;
 
         return !Physics.Raycast(eyePosition.position, dirToPlayer, viewDistance, viewMask,
@@ -199,41 +214,42 @@ public class Enemy : MonoBehaviour {
 
     //detects colliders entering the hearing range
     private void CheckHearingRange() {
-        var colliders = Physics.OverlapSphere(transform.position, hearingRange, decoyMask);
+        var hitCount = Physics.OverlapSphereNonAlloc(transform.position, hearingRange, _hearingHits, decoyMask);
 
-        if (colliders.Length > 0 && enemyState != EnemyState.Chasing) {
-            distracted = true;
-            lastDecoyPos = colliders[0].transform.position;
+        if (hitCount > 0 && _enemyState != EnemyState.Chasing) {
+            _distracted = true;
+            var decoyCollider = _hearingHits[0];
+            _lastDecoyPos = decoyCollider.transform.position;
 
-            decoyParticles = colliders[0].GetComponent<ParticleSystem>();
-            distractedTimer = decoyParticles != null ? decoyParticles.main.duration : 3f;
-            enemyState = EnemyState.Investigating;
+            _decoyParticles = decoyCollider.GetComponent<ParticleSystem>();
+            _distractedTimer = _decoyParticles != null ? _decoyParticles.main.duration : 3f;
+            _enemyState = EnemyState.Investigating;
             Debug.Log("HUUUUUUUUUUUUUUUUUUUUUHHHHHHHHH");
         }
     }
 
     private void UpdateDetectionUI() {
-        detectionIcon.fillAmount = detectionMeter;
-        detectionIcon.gameObject.SetActive(detectionMeter > 0f);
+        detectionIcon.fillAmount = _detectionMeter;
+        detectionIcon.gameObject.SetActive(_detectionMeter > 0f);
     }
 
     /// ------------------------------
     /// Combat
     /// ------------------------------
     private void ChasePlayer() {
-        lastKnownPlayerPos = player.position;
-        agent.SetDestination(player.position);
+        _lastKnownPlayerPos = player.position;
+        _agent.SetDestination(player.position);
     }
 
     private void CheckKillRange() {
-        var colliders = Physics.OverlapSphere(transform.position, killRange, playerMask);
-        killTarget = colliders.Length > 0 ? colliders[0].gameObject : null;
+        var hitCount = Physics.OverlapSphereNonAlloc(transform.position, killRange, _killHits, playerMask);
+        _killTarget = hitCount > 0 ? _killHits[0].gameObject : null;
     }
 
     private void TryKillPlayer() {
-        if (killTarget == null) return;
+        if (_killTarget == null) return;
 
-        Destroy(killTarget);
+        Destroy(_killTarget);
         SceneManager.LoadScene("Scenes/You Died");
     }
 
@@ -242,95 +258,98 @@ public class Enemy : MonoBehaviour {
     /// ------------------------------
     private void InitPatrol() {
         // If waypoints are null do nothing
-        if (waypoints == null || waypoints.Length == 0) return;
+        if (_waypoints == null || _waypoints.Length == 0) return;
 
-        agent.Warp(waypoints[0]);
+        _agent.Warp(_waypoints[0]);
 
-        targetIndex = waypoints.Length > 1 ? 1 : 0;
+        _targetIndex = _waypoints.Length > 1 ? 1 : 0;
 
-        enemyState = EnemyState.Moving; // Set patrol state
-        waitTimer = 0f; // Guarantee no leftover state
+        _enemyState = EnemyState.Moving; // Set patrol state
+        _waitTimer = 0f; // Guarantee no leftover state
     }
 
     private void CacheWaypoints() {
         // If there's no pathHolder set waypoints to null for other checks and do nothing
         if (!pathHolder) {
             Debug.Log("pathHolder not found, create a pathHolder.");
-            waypoints = null;
+            _waypoints = null;
             return;
         }
 
         // Order waypoints from the order in the unity heirarchy
         var count = pathHolder.childCount;
-        waypoints = new Vector3[count]; // Allocating the waypoint array
+        _waypoints = new Vector3[count]; // Allocating the waypoint array
 
         // Loop through each child transform of pathHolder
         for (var i = 0; i < count; i++)
-            waypoints[i] = pathHolder.GetChild(i).position;
+            _waypoints[i] = pathHolder.GetChild(i).position;
     }
 
     private void PatrolMove() {
-        agent.SetDestination(waypoints[targetIndex]);
+        _agent.SetDestination(_waypoints[_targetIndex]);
 
         if (HasArrived()) {
-            waitTimer = waitTime;
-            enemyState = EnemyState.Waiting;
+            _waitTimer = waitTime;
+            _enemyState = EnemyState.Waiting;
         }
     }
 
     private bool HasArrived() {
-        return !agent.pathPending
-               && agent.remainingDistance <= agent.stoppingDistance
-               && agent.velocity.sqrMagnitude == 0f;
+        return !_agent.pathPending
+               && _agent.remainingDistance <= _agent.stoppingDistance
+               && _agent.velocity.sqrMagnitude == 0f;
     }
 
     private void PatrolWait() {
-        waitTimer -= Time.deltaTime;
-        if (waitTimer > 0f) return;
+        _waitTimer -= Time.deltaTime;
+        if (_waitTimer > 0f) return;
 
         // Advance to next index and wrap index back to 0
-        targetIndex = (targetIndex + 1) % waypoints.Length;
-        enemyState = EnemyState.Moving;
+        _targetIndex = (_targetIndex + 1) % _waypoints.Length;
+        _enemyState = EnemyState.Moving;
     }
 
     //move towards whatever has caught their attention
     private void InvestigateMove() {
-        agent.SetDestination(lastDecoyPos);
+        _agent.SetDestination(_lastDecoyPos);
 
-        if (HasArrived() && !reachedDecoy) {
-            reachedDecoy = true;
-            agent.ResetPath();
+        if (HasArrived() && !_reachedDecoy) {
+            _reachedDecoy = true;
+            _agent.ResetPath();
         }
 
-        if (reachedDecoy) {
-            transform.eulerAngles += Vector3.up * 60f * Time.deltaTime;
-            distractedTimer -= Time.deltaTime;
-            if (distractedTimer <= 0f) {
-                distracted = false;
-                reachedDecoy = false;
-                enemyState = EnemyState.Moving;
+        if (_reachedDecoy) {
+            transform.eulerAngles += Vector3.up * (60f * Time.deltaTime);
+            _distractedTimer -= Time.deltaTime;
+            if (_distractedTimer <= 0f) {
+                _distracted = false;
+                _reachedDecoy = false;
+                _enemyState = EnemyState.Moving;
             }
         }
     }
 
     private void SearchMove() {
-        agent.SetDestination(lastKnownPlayerPos);
+        _agent.SetDestination(_lastKnownPlayerPos);
 
-        if (HasArrived() && !reachedSearchPoint) {
-            reachedSearchPoint = true;
-            agent.ResetPath();
+        if (HasArrived() && !_reachedSearchPoint) {
+            _reachedSearchPoint = true;
+            _agent.ResetPath();
         }
 
-        if (reachedSearchPoint) {
-            transform.eulerAngles += Vector3.up * 60f * Time.deltaTime;
-            searchTimer -= Time.deltaTime;
+        if (_reachedSearchPoint) {
+            transform.eulerAngles += Vector3.up * (60f * Time.deltaTime);
+            _searchTimer -= Time.deltaTime;
 
-            if (searchTimer <= 0f) {
-                detectionMeter = 0f;
-                reachedSearchPoint = false;
-                enemyState = EnemyState.Moving;
-                if (currentMarker != null) Destroy(currentMarker);
+            if (_searchTimer <= 0f) {
+                _detectionMeter = 0f;
+                _reachedSearchPoint = false;
+                _enemyState = EnemyState.Moving;
+                if (_currentMarker != null) Destroy(_currentMarker);
             }
         }
     }
 }
+
+}
+
