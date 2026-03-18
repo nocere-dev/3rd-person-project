@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
 
     private CharacterController controller;
     Animator animator;
+    
     private PlayerCrouching crouching;
     
     // Inputs
