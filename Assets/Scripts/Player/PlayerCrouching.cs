@@ -9,6 +9,7 @@ public class PlayerCrouching : MonoBehaviour {
     [SerializeField] private float crouchTransitionSpeed = 5f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     private CharacterController controller;
+    Animator animator;
     private InputAction crouchAction;
 
     private bool crouchToggled;
@@ -19,11 +20,13 @@ public class PlayerCrouching : MonoBehaviour {
     private PlayerInput playerInput;
 
     public bool IsCrouching => originalHeight - currentHeight > 0.1f;
+    public bool IsCrouchActive => crouchToggled || IsCrouching;
 
     private void Awake() {
         player = GetComponent<Player>();
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        if (!animator) animator = GetComponentInChildren<Animator>();
         crouchAction = playerInput.actions["Crouch"];
     }
 
@@ -43,7 +46,10 @@ public class PlayerCrouching : MonoBehaviour {
 
     private void OnBeforeMove() {
         var requestCrouch = crouchAction.WasPressedThisFrame();
-        if (requestCrouch) crouchToggled = !crouchToggled;
+        if (requestCrouch) {
+            crouchToggled = !crouchToggled;
+            animator.SetBool("isCrouching", crouchToggled);
+        };
 
         var heightTarget = crouchToggled ? crouchHeight : originalHeight;
 
