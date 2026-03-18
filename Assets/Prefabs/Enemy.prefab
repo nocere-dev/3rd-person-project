@@ -72,6 +72,7 @@ MonoBehaviour:
   detectionIcon: {fileID: 1640715664989509665}
   lastKnownMarkerPrefab: {fileID: 1034859838142111536, guid: 36330ab73f10f054ba966b31939a4894, type: 3}
   waitTime: 2
+  searchTime: 2
 --- !u!136 &-4781442774740553991
 CapsuleCollider:
   m_ObjectHideFlags: 0
