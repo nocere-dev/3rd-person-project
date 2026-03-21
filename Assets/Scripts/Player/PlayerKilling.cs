@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class PlayerKilling : MonoBehaviour {
@@ -59,17 +60,26 @@ public class PlayerKilling : MonoBehaviour {
         if (canKill && target != null)
         {
             animator.SetTrigger("Attack");
+            StartCoroutine(DestroyAfterAnimation());
+
         }
     }
-    public void KillTarget()
+
+    IEnumerator DestroyAfterAnimation()
     {
+        // Wait until animator actually switches to the Attack state
+        yield return null;
+
+        // Get current animation state info
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        // Wait for the full animation to finish
+        yield return new WaitForSeconds(state.length);
+
         if (target != null)
         {
             Destroy(target);
             target = null;
         }
-
-        canKill = false;
-        indicator.SetActive(false);
     }
-}
+    }
