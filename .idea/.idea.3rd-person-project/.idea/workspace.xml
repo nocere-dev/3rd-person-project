@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26344e93-7a9a-4195-972c-8228c176f528" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.3rd-person-project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Cubemaps/Classic/FS000_Night_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Cubemaps/Classic/FS000_Night_01.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Cubemaps/Classic/FS000_Night_01_Moonless.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Cubemaps/Classic/FS000_Night_01_Moonless.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Moldularenvironment.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Moldularenvironment.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorInteraction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/environmental/DoorInteraction.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +139,8 @@
       <workItem from="1773401891662" duration="91000" />
       <workItem from="1773670441963" duration="1006000" />
       <workItem from="1773919681335" duration="1402000" />
+      <workItem from="1774106740315" duration="2000" />
+      <workItem from="1774106747573" duration="654000" />
     </task>
     <servers />
   </component>
@@ -143,6 +149,7 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>

@@ -1,11 +1,13 @@
 using UnityEngine;
 
 public class DoorInteraction : MonoBehaviour {
-    [Header("Door & Box")] public GameObject door;
-    public Renderer boxRenderer;
-    public Color interactColor = Color.green;
+    [Header("Door & Box")]
+    public GameObject door;
+    public Animator boxAnimator; 
+    public string interactTrigger = "Interact";
 
-    [Header("UI")] public GameObject pressEUI;
+    [Header("UI")]
+    public GameObject pressEUI;
 
     private bool playerInRange;
 
@@ -15,7 +17,8 @@ public class DoorInteraction : MonoBehaviour {
     }
 
     private void Update() {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E)) Interact();
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+            Interact();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -37,14 +40,13 @@ public class DoorInteraction : MonoBehaviour {
     }
 
     private void Interact() {
-        if (boxRenderer != null)
-            boxRenderer.material.color = interactColor;
-
+        
+            boxAnimator.SetTrigger(interactTrigger);
 
         if (door != null)
             door.SetActive(false);
 
-
+      
         if (pressEUI != null)
             pressEUI.SetActive(false);
 
