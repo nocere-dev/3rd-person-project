@@ -10,4 +10,5 @@ public class Ladder : MonoBehaviour {
         if (other.CompareTag("Player") && other.TryGetComponent<Player>(out var player))
             player.CurrentState = Player.State.Walking;
     }
+  
 }

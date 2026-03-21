@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
         Climbing
     }
 
+
     public Transform cam;
 
     [Header("Player Settings")] [SerializeField]
@@ -21,7 +22,17 @@ public class Player : MonoBehaviour {
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
 
+    [SerializeField] private string ladderTag = "Ladder";
+    [SerializeField] private float ladderSnapSpeed = 10f;
+
+    private bool isTouchingLadder;
+    private Transform currentLadder;
+
     public bool isHidden;
+
+    private bool atLadderTop;
+
+  
 
     private State _state;
 
@@ -48,11 +59,36 @@ public class Player : MonoBehaviour {
         set => controller.height = value;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(ladderTag))
+        {
+            isTouchingLadder = true;
+            currentLadder = other.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(ladderTag))
+        {
+            isTouchingLadder = false;
+            currentLadder = null;
+
+            if (CurrentState == State.Climbing)
+                CurrentState = State.Walking;
+        }
+    }
     public State CurrentState {
         get => _state;
-        set {
+        set
+        {
+            if (_state == value) return;
+
             _state = value;
             velocity = Vector3.zero;
+
+            animator.SetBool("isClimbingLadder", _state == State.Climbing);
         }
     }
 
@@ -136,22 +172,32 @@ public class Player : MonoBehaviour {
         controller.Move((CurrentVelocity + velocity) * Time.deltaTime);
     }
 
-    private void UpdateClimbing() {
+    private void UpdateClimbing()
+    {
         var moveInput = moveAction.ReadValue<Vector2>();
-        animator.SetBool("isClimbing", moveInput.magnitude > 0.1f);
 
-        if ((controller.isGrounded && moveInput.y < 0f) || jumpAction.WasPressedThisFrame()) {
+    
+        if (!isTouchingLadder || jumpAction.WasPressedThisFrame())
+        {
             CurrentState = State.Walking;
+            animator.speed = 1f; // make sure animation speed resets
             return;
         }
 
-        var climbDirection = new Vector3(0f, moveInput.y, 0f).normalized;
-        climbDirection *= climbingSpeed;
+        
+        float verticalInput = moveInput.y;
+        Vector3 climbVelocity = new Vector3(0f, verticalInput * climbingSpeed, 0f);
 
-        var factor = acceleration * Time.deltaTime;
-        velocity = Vector3.Lerp(velocity, climbDirection, factor);
-
+      
+        velocity = Vector3.Lerp(velocity, climbVelocity, acceleration * Time.deltaTime);
         controller.Move(velocity * Time.deltaTime);
+
+      
+        bool isMoving = Mathf.Abs(verticalInput) > 0.05f;
+        animator.SetBool("isClimbingLadder", isMoving);       
+        animator.speed = isMoving ? 1f : 0f;
+        float targetSpeed = isMoving ? 1f : 0f;
+        animator.speed = Mathf.Lerp(animator.speed, targetSpeed, Time.deltaTime * 5f);
     }
 
     private void UpdateLook() {
