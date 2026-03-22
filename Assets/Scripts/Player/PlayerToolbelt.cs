@@ -10,6 +10,10 @@ public class PlayerToolbelt : MonoBehaviour {
 
     public LayerMask playerLayer;
 
+    public int uses = 3;
+
+    public TextMeshProUGUI usesIndicator;
+
     [SerializeField] private int selectedToolIndex;
     private CharacterController controller;
     Animator animator;

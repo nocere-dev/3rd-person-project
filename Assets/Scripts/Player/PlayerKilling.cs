@@ -17,6 +17,8 @@ public class PlayerKilling : MonoBehaviour {
     private GameObject target;
     private Player player;
 
+    public PlayerToolbelt toolUses;
+
     private void Start() {
         indicator.SetActive(false);
     }
