@@ -8,6 +8,6 @@ public class TryAgain : MonoBehaviour {
     }
 
     public void TryAgainButton() {
-        SceneManager.LoadScene("GreyBox");
+        SceneManager.LoadScene("Moldularenvironment");
     }
 }
