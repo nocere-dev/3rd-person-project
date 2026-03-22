@@ -11,6 +11,8 @@ public class PlayerKilling : MonoBehaviour {
 
     private GameObject target;
 
+    public PlayerToolbelt toolUses;
+
     private void Start() {
         indicator.SetActive(false);
     }
@@ -45,6 +47,7 @@ public class PlayerKilling : MonoBehaviour {
         if (canKill && target != null) {
             Destroy(target);
 
+            toolUses.uses++;
             canKill = false;
             indicator.SetActive(false);
         }

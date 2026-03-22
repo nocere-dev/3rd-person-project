@@ -10,10 +10,15 @@ public class PlayerToolbelt : MonoBehaviour {
 
     public LayerMask playerLayer;
 
+    public int uses = 3;
+
+    public TextMeshProUGUI usesIndicator;
+
     [SerializeField] private int selectedToolIndex;
 
     private void Start() {
         toolNameText.text = assassin_belt[selectedToolIndex].name;
+        uses = 3;
     }
 
 
@@ -24,7 +29,16 @@ public class PlayerToolbelt : MonoBehaviour {
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
         }
 
-        if (Input.GetMouseButtonDown(0)) Throw(selectedToolIndex);
+        if (Input.GetMouseButtonDown(0) && uses > 0)
+        {
+            Throw(selectedToolIndex);
+            if (assassin_belt[selectedToolIndex].name != "hand")
+            {
+                uses--;
+            }
+        }
+
+        usesIndicator.text = uses.ToString();
     }
 
     private void FixedUpdate() {
@@ -39,9 +53,19 @@ public class PlayerToolbelt : MonoBehaviour {
         var spawnPosition = throwPoint.position;
         var throwDirection = ray.direction;
 
-        var thrownTool = Instantiate(assassin_belt[toolIndex].toolPrefab, spawnPosition, Quaternion.identity);
-        var toolRb = thrownTool.GetComponent<Rigidbody>();
+        if (assassin_belt[toolIndex].toolPrefab != null)
+        {
+            var thrownTool = Instantiate(assassin_belt[toolIndex].toolPrefab, spawnPosition, Quaternion.identity);
+            var toolRb = thrownTool.GetComponent<Rigidbody>();
+            if (toolRb != null)
+            {
+                toolRb.linearVelocity = throwDirection * assassin_belt[toolIndex].throwSpeed;
+            }
+        }
+        
+        
+        
 
-        if (toolRb != null) toolRb.linearVelocity = throwDirection * assassin_belt[toolIndex].throwSpeed;
+        
     }
 }
