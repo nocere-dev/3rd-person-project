@@ -39,6 +39,14 @@ public class PlayerKilling : MonoBehaviour {
         if (!animator) animator = GetComponentInChildren<Animator>();
     }
 
+    public void KillTarget()
+    {
+        if (target != null)
+        {
+            Destroy(target);
+            target = null;
+        }
+    }
     public void canAssassinate() {
         var colliders = Physics.OverlapSphere(transform.position, killRange, enemyMask);
 
@@ -60,7 +68,6 @@ public class PlayerKilling : MonoBehaviour {
         if (canKill && target != null)
         {
             animator.SetTrigger("Attack");
-            StartCoroutine(DestroyAfterAnimation());
 
         }
     }
