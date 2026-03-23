@@ -35,6 +35,22 @@ public class PlayerToolbelt : MonoBehaviour {
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
         }
 
+        if (Input.GetMouseButtonDown(0)) Throw(selectedToolIndex);
+       
+    }
+    public void SpawnTool()
+    {
+        var spawnPosition = throwPoint.position;
+        var throwDirection = Camera.main.transform.forward;
+
+        var thrownTool = Instantiate(assassin_belt[selectedToolIndex].toolPrefab, spawnPosition, Quaternion.identity);
+        var toolRb = thrownTool.GetComponent<Rigidbody>();
+
+        if (toolRb != null)
+            toolRb.linearVelocity = throwDirection * assassin_belt[selectedToolIndex].throwSpeed;
+    }
+    private void Throw(int toolIndex) {
+        animator.SetTrigger("Throw");
         if (Input.GetMouseButtonDown(0) && uses > 0)
         {
             if (assassin_belt[selectedToolIndex].name != "hand")
