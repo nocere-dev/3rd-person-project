@@ -47,6 +47,7 @@ public class PlayerKilling : MonoBehaviour {
         {
             Destroy(target);
             target = null;
+            toolUses.uses++;
         }
     }
     public void canAssassinate() {
