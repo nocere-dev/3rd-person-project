@@ -32,8 +32,6 @@ public class Player : MonoBehaviour {
 
     private bool atLadderTop;
 
-  
-
     private State _state;
 
     private CharacterController controller;
