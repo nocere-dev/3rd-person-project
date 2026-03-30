@@ -44,10 +44,13 @@ public class Enemy : MonoBehaviour {
     private Light spotLight;
 
     [SerializeField] private float viewDistance;
+    [SerializeField] private float _maxVerticalAngle = 30f;
     [SerializeField] private float hearingRange;
     [SerializeField] private LayerMask decoyMask;
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private float killRange = 3;
+    [SerializeField] private bool showViewGizmos = true;
+    [SerializeField] [Range(4, 40)] private int viewGizmoRays = 12;
 
     [Space] [Header("Detection Settings")] [SerializeField]
     private float detectionTime = 2f;
@@ -57,10 +60,13 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private GameObject lastKnownMarkerPrefab;
     [SerializeField] private float waitTime = 1f;
 
-    [Space] [Header("Search Settings")] [SerializeField]
-    private float searchTime = 2f;
+    [Space]
+    [Header("Search Settings")]
+    [SerializeField] private float searchTime = 2f;
 
-    [Space] [Header("Movement Settings")] private NavMeshAgent _agent;
+    [Space]
+    [Header("Movement Settings")]
+    private NavMeshAgent _agent;
 
     private Player _playerComponent;
 
@@ -89,6 +95,8 @@ public class Enemy : MonoBehaviour {
     private readonly Collider[] _hearingHits = new Collider[8];
     private readonly Collider[] _killHits = new Collider[2];
 
+    private static readonly Color ViewGizmoColor = new Color(0.1f, 0.8f, 1f, 1f);
+
     private void Start() {
         _agent = GetComponent<NavMeshAgent>();
         _defaultLightColour = spotLight.color;
@@ -115,7 +123,6 @@ public class Enemy : MonoBehaviour {
 
             if (_detectionMeter >= 1f && _enemyState != EnemyState.Chasing) {
                 _enemyState = EnemyState.Chasing;
-                TryKillPlayer();
             }
         }
         else {
@@ -166,19 +173,20 @@ public class Enemy : MonoBehaviour {
 
 
     private void OnDrawGizmos() {
-        var startPos = pathHolder.GetChild(0).position;
-        var prevPos = startPos;
+        if (pathHolder != null && pathHolder.childCount > 0) {
+            var startPos = pathHolder.GetChild(0).position;
+            var prevPos = startPos;
 
-        foreach (Transform waypoint in pathHolder) {
-            Gizmos.DrawSphere(waypoint.position, .3f);
-            Gizmos.DrawLine(prevPos, waypoint.position);
-            prevPos = waypoint.position;
+            foreach (Transform waypoint in pathHolder) {
+                Gizmos.DrawSphere(waypoint.position, .3f);
+                Gizmos.DrawLine(prevPos, waypoint.position);
+                prevPos = waypoint.position;
+            }
+
+            Gizmos.DrawLine(prevPos, startPos);
         }
 
-        Gizmos.DrawLine(prevPos, startPos);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(eyePosition.position, transform.forward * viewDistance);
+        DrawViewGizmos();
     }
 
     /// ------------------------------
@@ -192,21 +200,71 @@ public class Enemy : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, killRange);
     }
 
+    private void DrawViewGizmos() {
+        if (!showViewGizmos || viewDistance <= 0f) return;
+
+        Vector3 origin = eyePosition != null ? eyePosition.position : transform.position;
+        float horizontalViewAngle = spotLight != null ? spotLight.spotAngle : _viewAngle;
+        if (horizontalViewAngle <= 0f) horizontalViewAngle = 60f;
+
+        float halfHorizontal = horizontalViewAngle * 0.5f;
+        float verticalLimit = Mathf.Max(0f, _maxVerticalAngle);
+        int rayCount = Mathf.Max(2, viewGizmoRays);
+
+        Gizmos.color = ViewGizmoColor;
+
+        for (int i = 0; i <= rayCount; i++) {
+            float t = i / (float)rayCount;
+            float yaw = Mathf.Lerp(-halfHorizontal, halfHorizontal, t);
+
+            Vector3 baseDirection = Quaternion.AngleAxis(yaw, Vector3.up) * transform.forward;
+            Gizmos.DrawRay(origin, baseDirection.normalized * viewDistance);
+
+            if (i == 0 || i == rayCount || i == rayCount / 2) {
+                Vector3 upDirection = Quaternion.AngleAxis(-verticalLimit, transform.right) * baseDirection;
+                Vector3 downDirection = Quaternion.AngleAxis(verticalLimit, transform.right) * baseDirection;
+                Gizmos.DrawRay(origin, upDirection.normalized * viewDistance);
+                Gizmos.DrawRay(origin, downDirection.normalized * viewDistance);
+            }
+        }
+    }
+
     /// ------------------------------
     /// Detection
     /// ------------------------------
+    
+    private bool IsInFront(float minDot = 0.25f) {
+            Vector3 toPlayer = player.position - transform.position;
+            Vector3 flat = new Vector3(toPlayer.x, 0f, toPlayer.z).normalized;
+            return Vector3.Dot(transform.forward, flat) >= minDot;
+        }
+
     private bool CanSeePlayer() {
-        if (player == null || _playerComponent == null) return false;
+        if (!player || !_playerComponent) return false;
         if (_playerComponent.isHidden) return false;
+        
+        float proximityRadius = 1.75f;
+        if (Vector3.Distance(transform.position, player.position) <= proximityRadius && IsInFront(0.1f))
+        {
+            Vector3 dir = (player.position - eyePosition.position).normalized;
+            float dist = Vector3.Distance(eyePosition.position, player.position);
+            if (!Physics.Raycast(eyePosition.position, dir, dist, viewMask, QueryTriggerInteraction.Collide))
+                return true;
+        }
 
         if (Vector3.Distance(transform.position, player.position) >= viewDistance)
             return false;
 
-        var dirToPlayer = (player.position - transform.position).normalized;
-
-        var angleToPlayer = Vector3.Angle(transform.forward, dirToPlayer);
-        if (angleToPlayer >= _viewAngle / 2f)
-            return false;
+        Vector3 dirToPlayer = player.position - transform.position;
+        
+        Vector3 flatDirToPlayer = new Vector3(dirToPlayer.x, 0, dirToPlayer.z).normalized;
+        float horizontalAngle = Vector3.Angle(transform.forward, flatDirToPlayer);
+        
+        if (horizontalAngle >= _viewAngle / 2f) return false;
+        
+        float verticalAngle = Mathf.Abs(Vector3.Angle(flatDirToPlayer, dirToPlayer.normalized));
+        
+        if (verticalAngle > _maxVerticalAngle) return false;
 
         return !Physics.Raycast(eyePosition.position, dirToPlayer, viewDistance, viewMask,
             QueryTriggerInteraction.Collide);
@@ -239,6 +297,8 @@ public class Enemy : MonoBehaviour {
     private void ChasePlayer() {
         _lastKnownPlayerPos = player.position;
         _agent.SetDestination(player.position);
+        
+        TryKillPlayer();
     }
 
     private void CheckKillRange() {
@@ -246,9 +306,19 @@ public class Enemy : MonoBehaviour {
         _killTarget = hitCount > 0 ? _killHits[0].gameObject : null;
     }
 
-    private void TryKillPlayer() {
-        if (_killTarget == null) return;
+    private bool CanKillPlayerNow() {
+        if (_killTarget == null || player == null) return false;
+        if (!IsInFront(0.35f)) return false; // stricter for kill
 
+        Vector3 toPlayer = player.position - eyePosition.position;
+        float dist = toPlayer.magnitude;
+        if (dist > killRange) return false;
+
+        return !Physics.Raycast(eyePosition.position, toPlayer.normalized, dist, viewMask, QueryTriggerInteraction.Collide);
+    }
+
+    private void TryKillPlayer() {
+        if (!CanKillPlayerNow()) return;
         Destroy(_killTarget);
         SceneManager.LoadScene("Scenes/You Died");
     }
