@@ -18,15 +18,28 @@ public class PlayerKilling : MonoBehaviour {
     private Player player;
 
     public PlayerToolbelt toolUses;
+    [SerializeField] private float killDelay = 0.35f;
+
+    private Coroutine killRoutine;
 
     private void Start() {
-        indicator.SetActive(false);
+        if (indicator != null)
+        {
+            indicator.SetActive(false);
+        }
     }
 
     private void Update() {
         canAssassinate();
 
-        if (Input.GetMouseButtonDown(1)) Assassinating();
+        bool rightClickPressed = Mouse.current != null
+            ? Mouse.current.rightButton.wasPressedThisFrame
+            : Input.GetMouseButtonDown(1);
+
+        if (rightClickPressed)
+        {
+            Assassinating();
+        }
     }
 
     private void OnDrawGizmosSelected() {
@@ -48,19 +61,44 @@ public class PlayerKilling : MonoBehaviour {
             Destroy(target);
             target = null;
         }
+
+        canKill = false;
+        if (indicator != null)
+        {
+            indicator.SetActive(false);
+        }
     }
     public void canAssassinate() {
         var colliders = Physics.OverlapSphere(transform.position, killRange, enemyMask);
 
         if (colliders.Length > 0) {
             canKill = true;
-            indicator.SetActive(true);
-            target = colliders[0].gameObject;
+            if (indicator != null)
+            {
+                indicator.SetActive(true);
+            }
+
+            Collider closest = colliders[0];
+            float closestSqrDistance = (closest.transform.position - transform.position).sqrMagnitude;
+            for (int i = 1; i < colliders.Length; i++)
+            {
+                float sqrDistance = (colliders[i].transform.position - transform.position).sqrMagnitude;
+                if (sqrDistance < closestSqrDistance)
+                {
+                    closest = colliders[i];
+                    closestSqrDistance = sqrDistance;
+                }
+            }
+
+            target = closest.transform.root.gameObject;
 
         }
         else {
             canKill = false;
-            indicator.SetActive(false);
+            if (indicator != null)
+            {
+                indicator.SetActive(false);
+            }
             target = null;
         }
     }
@@ -69,26 +107,25 @@ public class PlayerKilling : MonoBehaviour {
     {
         if (canKill && target != null)
         {
-            animator.SetTrigger("Attack");
+            if (animator != null)
+            {
+                animator.SetTrigger("Attack");
+            }
+
+            if (killRoutine != null)
+            {
+                StopCoroutine(killRoutine);
+            }
+
+            killRoutine = StartCoroutine(DestroyAfterAnimation());
 
         }
     }
 
     IEnumerator DestroyAfterAnimation()
     {
-        // Wait until animator actually switches to the Attack state
-        yield return null;
-
-        // Get current animation state info
-        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
-
-        // Wait for the full animation to finish
-        yield return new WaitForSeconds(state.length);
-
-        if (target != null)
-        {
-            Destroy(target);
-            target = null;
-        }
+        yield return new WaitForSeconds(killDelay);
+        KillTarget();
+        killRoutine = null;
     }
     }
