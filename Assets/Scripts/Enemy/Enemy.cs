@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour {
     [Header("AI Settings")] [SerializeField]
     private EnemyMoveType moveType;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private EnemyClass enemyClass;
     [SerializeField] private Transform pathHolder;
     [SerializeField] private Transform player;
@@ -70,7 +71,7 @@ public class Enemy : MonoBehaviour {
 
     private Player _playerComponent;
 
-    private GameObject _currentMarker;
+        private GameObject _currentMarker;
 
     private ParticleSystem _decoyParticles;
     private Color _defaultLightColour;
@@ -99,7 +100,10 @@ public class Enemy : MonoBehaviour {
 
     private void Start() {
         _agent = GetComponent<NavMeshAgent>();
-        _defaultLightColour = spotLight.color;
+            if (animator == null)
+                animator = GetComponent<Animator>();
+            if (!animator) animator = GetComponentInChildren<Animator>();
+            _defaultLightColour = spotLight.color;
         var playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null) {
             player = playerObject.transform;
@@ -114,7 +118,8 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
-        CheckKillRange();
+        CheckKillRange();  
+            UpdateAnimations();
 
         if (CanSeePlayer()) {
             _detectionMeter += Time.deltaTime / detectionTime;
@@ -169,10 +174,22 @@ public class Enemy : MonoBehaviour {
 
         if (!_distracted)
             CheckHearingRange();
-    }
+      
+        }
+
+        private void UpdateAnimations()
+        {
+            float speed = _agent.velocity.magnitude;
+
+            animator.SetFloat("speed", speed);
+            animator.SetBool("ismoving", speed > 0.1f);
+            animator.SetBool("isChasing", _enemyState == EnemyState.Chasing);
+            animator.SetBool("isInvestigating", _enemyState == EnemyState.Investigating);
+            animator.SetBool("isSearching", _enemyState == EnemyState.Searching);
+        }
 
 
-    private void OnDrawGizmos() {
+        private void OnDrawGizmos() {
         if (pathHolder != null && pathHolder.childCount > 0) {
             var startPos = pathHolder.GetChild(0).position;
             var prevPos = startPos;

@@ -32,6 +32,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4796877731645004577}
+  - {fileID: 4448874158370900317}
   - {fileID: 5299621406282635565}
   - {fileID: 1176411032545379553}
   - {fileID: 1092911208042983910}
@@ -59,6 +61,7 @@ MonoBehaviour:
     m_Bits: 192
   spotLight: {fileID: 750404261904799339}
   viewDistance: 10
+  _maxVerticalAngle: 30
   hearingRange: 30
   decoyMask:
     serializedVersion: 2
@@ -67,6 +70,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   killRange: 3
+  showViewGizmos: 1
+  viewGizmoRays: 12
   detectionTime: 2
   detectionDecayRate: 1
   detectionIcon: {fileID: 1640715664989509665}
@@ -175,13 +180,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6897569646753419987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.506, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
   m_LocalScale: {x: 0.23677, y: 0.32421, z: 0.22471}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4796877731645004577}
-  m_Father: {fileID: 5299621406282635565}
+  m_Children: []
+  m_Father: {fileID: 4740217685829331324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4830855679660384413
 MeshFilter:
@@ -345,8 +349,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.99399996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4448874158370900317}
+  m_Children: []
   m_Father: {fileID: 4740217685829331324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1801960362433261969
@@ -535,11 +538,11 @@ Transform:
   m_GameObject: {fileID: 8229825125350624835}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00000018384581, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
+  m_LocalScale: {x: 0.23677, y: 0.32421, z: 0.22471}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4448874158370900317}
+  m_Father: {fileID: 4740217685829331324}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &750404261904799339
 Light:
