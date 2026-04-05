@@ -39,6 +39,7 @@ public class PlayerKilling : MonoBehaviour {
         if (rightClickPressed)
         {
             Assassinating();
+            toolUses.uses++;
         }
     }
 

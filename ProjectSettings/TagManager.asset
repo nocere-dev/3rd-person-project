@@ -8,6 +8,7 @@ TagManager:
   - ObjectToCollide
   - aggro
   - Ladder
+  - pushable
   layers:
   - Default
   - TransparentFX
