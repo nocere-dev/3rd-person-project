@@ -61206,7 +61206,7 @@ AnimationClip:
   - time: 0.33333334
     functionName: KillTarget
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 4194583201375743207, guid: 9d3856762b9946f4d938442e075d5cb8, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
