@@ -335,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 1046532120997879842}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12000693, y: -0.033281155, z: 0.004025339, w: 0.99220693}
-  m_LocalPosition: {x: -73.22838, y: 16.23432, z: -13.843396}
+  m_LocalPosition: {x: -13.24406, y: 2.2343197, z: -4.9745483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -539,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832381462117211062}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12000692, y: -0.03328115, z: 0.004025338, w: 0.99220693}
+  m_LocalRotation: {x: 0.12000693, y: -0.033281155, z: 0.0040253396, w: 0.9922069}
   m_LocalPosition: {x: -13.24406, y: 2.2343197, z: -4.9745483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1476,16 +1476,47 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 68043663ad024994493d1f5629177d06, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68043663ad024994493d1f5629177d06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3722075413907691477}
   m_SourcePrefab: {fileID: 100100000, guid: 68043663ad024994493d1f5629177d06, type: 3}
 --- !u!4 &1252675756611013730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68043663ad024994493d1f5629177d06, type: 3}
   m_PrefabInstance: {fileID: 1650811756432747401}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1885237317874702040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68043663ad024994493d1f5629177d06, type: 3}
+  m_PrefabInstance: {fileID: 1650811756432747401}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3722075413907691477
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885237317874702040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 68043663ad024994493d1f5629177d06, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1566a21b5c451d54689679fa83584203, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8879158662275568489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1589,7 +1620,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::toolblet
   toolNameText: {fileID: 1725889430225388247}
-  toolUses: {fileID: 955863240704831477}
   throwPoint: {fileID: 5669347735642468161}
   assassin_belt:
   - {fileID: 11400000, guid: 8e9e0d4183cab5d468627472f7fb02c1, type: 2}
@@ -1598,7 +1628,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  toolAmount: 3
   selectedToolIndex: 0
 --- !u!114 &7274849877925779368
 MonoBehaviour:

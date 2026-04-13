@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
-  ShowDebugText: 0
+  ShowDebugText: 1
   ShowCameraFrustum: 1
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
@@ -1195,7 +1195,7 @@ PrefabInstance:
     - target: {fileID: 2924614312786680671, guid: 7eed4de61b4d96c4ba5c157afed4ced9, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 7257737032154925632}
+      objectReference: {fileID: 4377445657489211264}
     - target: {fileID: 3398825423149386910, guid: 7eed4de61b4d96c4ba5c157afed4ced9, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1228,6 +1228,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4063729789744735457, guid: 7eed4de61b4d96c4ba5c157afed4ced9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3716270263171384983}
+    - targetCorrespondingSourceObject: {fileID: 4063729789744735457, guid: 7eed4de61b4d96c4ba5c157afed4ced9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7528051506262317377}
   m_SourcePrefab: {fileID: 100100000, guid: 7eed4de61b4d96c4ba5c157afed4ced9, type: 3}
 --- !u!4 &1041530610343499853 stripped
 Transform:
@@ -1261,7 +1264,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   uses: 3
-  usesIndicator: {fileID: 0}
+  usesIndicator: {fileID: 3156305099411986989}
   selectedToolIndex: 0
 --- !u!114 &3716270263171384983
 MonoBehaviour:
@@ -1275,14 +1278,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872bfe987b941f24d86724229c68dab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::killing
+  audioSource: {fileID: 7528051506262317377}
   killRange: 3
   enemyMask:
     serializedVersion: 2
     m_Bits: 1024
   canKill: 0
   indicator: {fileID: 3424647933716679918}
-  toolUses: {fileID: 0}
+  toolUses: {fileID: 5513043961943174825}
   killDelay: 0.35
+--- !u!82 &7528051506262317377
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464055022472042035}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: a5b4734634c37f24ba5d8c72fa718c1c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &5485727914237849098
 PrefabInstance:
   m_ObjectHideFlags: 0

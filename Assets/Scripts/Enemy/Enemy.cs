@@ -12,19 +12,10 @@ public enum EnemyMoveType {
     Patroling
 }
 
-
-public enum EnemyClass {
-    Light,
-    Medium,
-    Heavy
-}
-
-
 public enum EnemyState {
     Waiting,
     Moving,
     Chasing,
-    Alerted,
     Investigating,
     Searching
 }
@@ -35,7 +26,6 @@ public class Enemy : MonoBehaviour {
     private EnemyMoveType moveType;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private EnemyClass enemyClass;
     [SerializeField] private Transform pathHolder;
     [SerializeField] private Transform player;
     public Transform eyePosition;
@@ -71,7 +61,7 @@ public class Enemy : MonoBehaviour {
 
     private Player _playerComponent;
 
-        private GameObject _currentMarker;
+    private GameObject _currentMarker;
 
     private ParticleSystem _decoyParticles;
     private Color _defaultLightColour;
