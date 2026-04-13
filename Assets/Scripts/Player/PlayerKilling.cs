@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerKilling : MonoBehaviour {
     private CharacterController controller;
     Animator animator;
+    
+    public AudioSource audioSource;
 
     public float killRange;
 
@@ -23,6 +25,7 @@ public class PlayerKilling : MonoBehaviour {
     private Coroutine killRoutine;
 
     private void Start() {
+        audioSource = GetComponent<AudioSource>();
         if (indicator != null)
         {
             indicator.SetActive(false);
@@ -63,6 +66,7 @@ public class PlayerKilling : MonoBehaviour {
             target = null;
         }
 
+        audioSource.Play();
         canKill = false;
         if (indicator != null)
         {
