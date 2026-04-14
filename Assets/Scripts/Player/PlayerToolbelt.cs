@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+
 public class PlayerToolbelt : MonoBehaviour {
+    
     public TextMeshProUGUI toolNameText;
 
     public Transform throwPoint;
@@ -24,7 +26,6 @@ public class PlayerToolbelt : MonoBehaviour {
         if (!animator) animator = GetComponentInChildren<Animator>();
     }
 
-    private void FixedUpdate() { }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q))
         {
