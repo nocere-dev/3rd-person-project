@@ -27,10 +27,15 @@ public class Pressure_Plate : MonoBehaviour
     {
         if(other.CompareTag("pushable"))
         {
-            if (Door != null)
-            {
-                Door.SetActive(false);
-            }
+            open();
+        }
+    }
+
+    private void open()
+    {
+        if (Door != null)
+        {
+            Door.SetActive(false);
         }
     }
 }
