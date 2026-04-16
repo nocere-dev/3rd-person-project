@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: a118882ae6fcda642b05117a9367e6e9
+guid: 40f0c1f9a5a17f94096d269ee1e2d235
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wood Light.001
-    second: {fileID: 2100000, guid: acc26db0f75d6ba4fb6e4bc40a1f3e58, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Yellow Plastic
-    second: {fileID: 2100000, guid: 7d0255bd30753c243be1a4b2fc7a99ea, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: wood-78_smooth
-    second: {fileID: 2800000, guid: 4c85d28dff5e62c4a8dbb4cde09e508b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: wood01_diffuse
-    second: {fileID: 2800000, guid: ee20a32c92d72fd479dff8305da69239, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -55,7 +35,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
@@ -66,7 +46,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
