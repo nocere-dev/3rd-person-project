@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: f9fe20d5c8acc514d818fcb885ba0258
+guid: a302441400b09444d9d7bbf5f506e8a9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: paper_02_color
+    second: {fileID: 2800000, guid: f261fed7bf1985e40b46eb4fc5797ef3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: paper_02_roughness
+    second: {fileID: 2800000, guid: daf4cc0dc7a941546ae1ebe905237a1e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood05_diffuse
+    second: {fileID: 2800000, guid: 229c7ac956055754d8a22c406f777f5b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood05_normal_opengl
+    second: {fileID: 2800000, guid: a9ffbd7b3b2057a429746916581e9401, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wood05_roughness
+    second: {fileID: 2800000, guid: 6d6d9d20106469348ac934a9ec1bd318, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +60,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
@@ -46,7 +71,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
