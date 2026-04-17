@@ -1,44 +1,34 @@
 fileFormatVersion: 2
-guid: ad8ec79217ecbaf4ebf2eedca9ba404f
+guid: 4ce98cf8ed3c33b48a2a41e1b24b81b1
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
+      type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Dry Grass
-    second: {fileID: 2100000, guid: 6d35cca366e00f14d9f22060042da9f7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal.002
-    second: {fileID: 2100000, guid: dc4e3789f47a76e428b873a74bddaadf, type: 2}
+      name: Wood057_2K_Color
+    second: {fileID: 2800000, guid: ccc68a876c5aa7b4685d3b78f41043f8, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Metal_BaseColor
-    second: {fileID: 2800000, guid: e47f64f272b07a64cbf93291ad1cee58, type: 3}
+      name: Wood057_2K_Roughness
+    second: {fileID: 2800000, guid: b8367d499b5c6cc4da4bf8165cf6c774, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Metal_Normal
-    second: {fileID: 2800000, guid: 9cbc33d04ccfe4145a7ad9d26fb403b2, type: 3}
+      name: wood_basecolor_diffuse
+    second: {fileID: 2800000, guid: afb3d74ee8272204f88a3cf2d8a6f0f0, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Metal_Roughness
-    second: {fileID: 2800000, guid: 9cd289c1b984f494fa0ead1991e7d9f0, type: 3}
+      name: wood_normal_opengl
+    second: {fileID: 2800000, guid: dd5ec117af0e55a459be6559e9c1341d, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: grass-2_diffuse
-    second: {fileID: 2800000, guid: 075c73594982070438c567e36c438a0b, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: grass-2_smooth
-    second: {fileID: 2800000, guid: a13ddfcb0f6cce94cb46cf7e93a8faf2, type: 3}
+      name: wood_specular
+    second: {fileID: 2800000, guid: 9422c8432da85144385a9e36abf584bb, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -68,9 +58,9 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
@@ -81,7 +71,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -126,7 +116,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.005
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
