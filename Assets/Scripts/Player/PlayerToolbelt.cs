@@ -34,7 +34,7 @@ public class PlayerToolbelt : MonoBehaviour {
             Debug.Log("Selected tool: " + assassin_belt[selectedToolIndex].name);
         }
 
-        if (Input.GetMouseButtonDown(0) && uses > 0 && assassin_belt[selectedToolIndex].name != "hand")
+        if (!PauseMenu.isPaused && Input.GetMouseButtonDown(0) && uses > 0 && assassin_belt[selectedToolIndex].name != "hand")
         {
             Throw(selectedToolIndex);
             uses--;
