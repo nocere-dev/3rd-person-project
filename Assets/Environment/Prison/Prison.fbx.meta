@@ -1,9 +1,44 @@
 fileFormatVersion: 2
-guid: 6fbdec4c1bd255148bf7f7063e2f8923
+guid: ad8ec79217ecbaf4ebf2eedca9ba404f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dry Grass
+    second: {fileID: 2100000, guid: 6d35cca366e00f14d9f22060042da9f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal.002
+    second: {fileID: 2100000, guid: dc4e3789f47a76e428b873a74bddaadf, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_BaseColor
+    second: {fileID: 2800000, guid: e47f64f272b07a64cbf93291ad1cee58, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_Normal
+    second: {fileID: 2800000, guid: 9cbc33d04ccfe4145a7ad9d26fb403b2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_Roughness
+    second: {fileID: 2800000, guid: 9cd289c1b984f494fa0ead1991e7d9f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grass-2_diffuse
+    second: {fileID: 2800000, guid: 075c73594982070438c567e36c438a0b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: grass-2_smooth
+    second: {fileID: 2800000, guid: a13ddfcb0f6cce94cb46cf7e93a8faf2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
