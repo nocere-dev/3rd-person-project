@@ -7,7 +7,8 @@ public class Player : MonoBehaviour {
         Walking,
         Climbing
     }
-    
+
+
     public Transform cam;
 
     [Header("Player Settings")] [SerializeField]

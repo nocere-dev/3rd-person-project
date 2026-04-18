@@ -5,15 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Menu/MainMenu.unity
-    guid: 76c14f53eb5837346b418f90ba2ca947
-  - enabled: 1
-    path: Assets/Scenes/FinalScene.unity
-    guid: 4182d8d1937f98145b9fc66f27e7b22b
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/GreyBox.unity
+    guid: 5d177e3f835ea91419d1438108a62921
   - enabled: 1
     path: Assets/Scenes/You Died.unity
     guid: d11cc182f1c9b3b4290e6f7785effbae
+  - enabled: 1
+    path: Assets/Scenes/Moldularenvironment.unity
+    guid: 0746439e05f99b24ea863039be692477
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
