@@ -3640,10 +3640,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 333912641730161037, guid: f74c22aa6f076674db71883cb8431dd5, type: 3}
-      propertyPath: isHidden
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6752947447065953433, guid: f74c22aa6f076674db71883cb8431dd5, type: 3}
       propertyPath: m_Name
       value: JIN KE
@@ -4263,11 +4259,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!4 &760422166 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1573368077025986790, guid: 54445f52d83242b489f869dffce94942, type: 3}
-  m_PrefabInstance: {fileID: 1917903461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &766138405
 GameObject:
   m_ObjectHideFlags: 0
@@ -9109,34 +9100,6 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 974326406}
-    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: eyePosition
-      value: 
-      objectReference: {fileID: 760422166}
-    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: viewGizmoRays
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: showViewGizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160207968441775725, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: m_Color.b
-      value: 0.12319422
-      objectReference: {fileID: 0}
-    - target: {fileID: 1160207968441775725, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1573368077025986790, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.677
-      objectReference: {fileID: 0}
-    - target: {fileID: 1573368077025986790, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.105
-      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -25.120947
@@ -9177,10 +9140,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4471765676455056232, guid: 54445f52d83242b489f869dffce94942, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5103805533795853737, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_Name
       value: Enemy 1
@@ -9218,8 +9177,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.2756764, g: 0.29903883, b: 0.3301887, a: 1}
-  m_Intensity: 0.6
+  m_Color: {r: 1, g: 0.97848594, b: 0.9198113, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
-        CheckKillRange();
+        CheckKillRange();  
             UpdateAnimations();
 
         if (CanSeePlayer()) {
