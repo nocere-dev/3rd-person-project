@@ -108,9 +108,10 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
-        CheckKillRange();  
-            UpdateAnimations();
+        CheckKillRange();
+        UpdateAnimations();
 
+        // ALWAYS check visibility and update detection meter, regardless of state
         if (CanSeePlayer()) {
             _detectionMeter += Time.deltaTime / detectionTime;
             _detectionMeter = Mathf.Clamp01(_detectionMeter);
@@ -125,7 +126,8 @@ public class Enemy : MonoBehaviour {
             _detectionMeter = Mathf.Clamp01(_detectionMeter);
             spotLight.color = Color.Lerp(_defaultLightColour, Color.red, _detectionMeter);
 
-            if (_enemyState == EnemyState.Chasing) {
+            // Only go to Searching if meter fully depletes AND was chasing
+            if (_enemyState == EnemyState.Chasing && _detectionMeter <= 0f) {
                 _lastKnownPlayerPos = player.position;
                 _searchTimer = searchTime;
                 _enemyState = EnemyState.Searching;
@@ -164,22 +166,21 @@ public class Enemy : MonoBehaviour {
 
         if (!_distracted)
             CheckHearingRange();
-      
-        }
+    }
 
-        private void UpdateAnimations()
-        {
-            float speed = _agent.velocity.magnitude;
+    private void UpdateAnimations()
+    {
+        float speed = _agent.velocity.magnitude;
 
-            animator.SetFloat("speed", speed);
-            animator.SetBool("ismoving", speed > 0.1f);
-            animator.SetBool("isChasing", _enemyState == EnemyState.Chasing);
-            animator.SetBool("isInvestigating", _enemyState == EnemyState.Investigating);
-            animator.SetBool("isSearching", _enemyState == EnemyState.Searching);
-        }
+        animator.SetFloat("speed", speed);
+        animator.SetBool("ismoving", speed > 0.1f);
+        animator.SetBool("isChasing", _enemyState == EnemyState.Chasing);
+        animator.SetBool("isInvestigating", _enemyState == EnemyState.Investigating);
+        animator.SetBool("isSearching", _enemyState == EnemyState.Searching);
+    }
 
 
-        private void OnDrawGizmos() {
+    private void OnDrawGizmos() {
         if (pathHolder != null && pathHolder.childCount > 0) {
             var startPos = pathHolder.GetChild(0).position;
             var prevPos = startPos;
@@ -224,12 +225,15 @@ public class Enemy : MonoBehaviour {
             float t = i / (float)rayCount;
             float yaw = Mathf.Lerp(-halfHorizontal, halfHorizontal, t);
 
-            Vector3 baseDirection = Quaternion.AngleAxis(yaw, Vector3.up) * transform.forward;
+            Vector3 forward = eyePosition != null ? eyePosition.forward : transform.forward;
+            Vector3 right = eyePosition != null ? eyePosition.right : transform.right;
+
+            Vector3 baseDirection = Quaternion.AngleAxis(yaw, Vector3.up) * forward;
             Gizmos.DrawRay(origin, baseDirection.normalized * viewDistance);
 
             if (i == 0 || i == rayCount || i == rayCount / 2) {
-                Vector3 upDirection = Quaternion.AngleAxis(-verticalLimit, transform.right) * baseDirection;
-                Vector3 downDirection = Quaternion.AngleAxis(verticalLimit, transform.right) * baseDirection;
+                Vector3 upDirection = Quaternion.AngleAxis(-verticalLimit, right) * baseDirection;
+                Vector3 downDirection = Quaternion.AngleAxis(verticalLimit, right) * baseDirection;
                 Gizmos.DrawRay(origin, upDirection.normalized * viewDistance);
                 Gizmos.DrawRay(origin, downDirection.normalized * viewDistance);
             }
@@ -241,40 +245,55 @@ public class Enemy : MonoBehaviour {
     /// ------------------------------
     
     private bool IsInFront(float minDot = 0.25f) {
-            Vector3 toPlayer = player.position - transform.position;
-            Vector3 flat = new Vector3(toPlayer.x, 0f, toPlayer.z).normalized;
-            return Vector3.Dot(transform.forward, flat) >= minDot;
-        }
+        Vector3 origin = eyePosition != null ? eyePosition.position : transform.position;
+        Vector3 forward = eyePosition != null ? eyePosition.forward : transform.forward;
+
+        Vector3 toPlayer = player.position - origin;
+        Vector3 flat = new Vector3(toPlayer.x, 0f, toPlayer.z).normalized;
+        Vector3 flatForward = new Vector3(forward.x, 0f, forward.z).normalized;
+
+        return Vector3.Dot(flatForward, flat) >= minDot;
+    }
 
     private bool CanSeePlayer() {
         if (!player || !_playerComponent) return false;
         if (_playerComponent.isHidden) return false;
-        
-        float proximityRadius = 1.75f;
-        if (Vector3.Distance(transform.position, player.position) <= proximityRadius && IsInFront(0.1f))
-        {
-            Vector3 dir = (player.position - eyePosition.position).normalized;
-            float dist = Vector3.Distance(eyePosition.position, player.position);
-            if (!Physics.Raycast(eyePosition.position, dir, dist, viewMask, QueryTriggerInteraction.Collide))
-                return true;
+
+        Vector3 origin = eyePosition != null ? eyePosition.position : transform.position;
+        Vector3 forward = eyePosition != null ? eyePosition.forward : transform.forward;
+        float currentViewAngle = spotLight != null ? spotLight.spotAngle : _viewAngle;
+
+        Vector3 toPlayer = player.position - origin;
+        float distanceToPlayer = toPlayer.magnitude;
+
+        if (distanceToPlayer > viewDistance) {
+            Debug.Log($"FAIL: Distance {distanceToPlayer:F1} > {viewDistance}");
+            return false;
         }
 
-        if (Vector3.Distance(transform.position, player.position) >= viewDistance)
+        Vector3 flatToPlayer = new Vector3(toPlayer.x, 0f, toPlayer.z).normalized;
+        Vector3 flatForward = new Vector3(forward.x, 0f, forward.z).normalized;
+        float horizontalAngle = Vector3.Angle(flatForward, flatToPlayer);
+
+        if (horizontalAngle > currentViewAngle * 0.5f) {
+            Debug.Log($"FAIL: Horizontal angle {horizontalAngle:F1}° > {currentViewAngle * 0.5f:F1}°");
             return false;
+        }
 
-        Vector3 dirToPlayer = player.position - transform.position;
-        
-        Vector3 flatDirToPlayer = new Vector3(dirToPlayer.x, 0, dirToPlayer.z).normalized;
-        float horizontalAngle = Vector3.Angle(transform.forward, flatDirToPlayer);
-        
-        if (horizontalAngle >= _viewAngle / 2f) return false;
-        
-        float verticalAngle = Mathf.Abs(Vector3.Angle(flatDirToPlayer, dirToPlayer.normalized));
-        
-        if (verticalAngle > _maxVerticalAngle) return false;
+        float verticalAngle = Mathf.Abs(Vector3.Angle(flatToPlayer, toPlayer.normalized));
+        if (verticalAngle > _maxVerticalAngle) {
+            Debug.Log($"FAIL: Vertical angle {verticalAngle:F1}° > {_maxVerticalAngle}°");
+            return false;
+        }
 
-        return !Physics.Raycast(eyePosition.position, dirToPlayer, viewDistance, viewMask,
-            QueryTriggerInteraction.Collide);
+        bool raycastHit = Physics.Raycast(origin, toPlayer.normalized, distanceToPlayer, viewMask, QueryTriggerInteraction.Collide);
+        if (raycastHit) {
+            Debug.Log($"FAIL: Raycast blocked");
+            return false;
+        }
+
+        Debug.Log("SUCCESS: Can see player!");
+        return true;
     }
 
     //detects colliders entering the hearing range
@@ -303,8 +322,9 @@ public class Enemy : MonoBehaviour {
     /// ------------------------------
     private void ChasePlayer() {
         _lastKnownPlayerPos = player.position;
+        Debug.Log($"ChasePlayer: Setting destination to {player.position}");
         _agent.SetDestination(player.position);
-        
+    
         TryKillPlayer();
     }
 
@@ -317,11 +337,12 @@ public class Enemy : MonoBehaviour {
         if (_killTarget == null || player == null) return false;
         if (!IsInFront(0.35f)) return false; // stricter for kill
 
-        Vector3 toPlayer = player.position - eyePosition.position;
+        Vector3 origin = eyePosition != null ? eyePosition.position : transform.position;
+        Vector3 toPlayer = player.position - origin;
         float dist = toPlayer.magnitude;
         if (dist > killRange) return false;
 
-        return !Physics.Raycast(eyePosition.position, toPlayer.normalized, dist, viewMask, QueryTriggerInteraction.Collide);
+        return !Physics.Raycast(origin, toPlayer.normalized, dist, viewMask, QueryTriggerInteraction.Collide);
     }
 
     private void TryKillPlayer() {
