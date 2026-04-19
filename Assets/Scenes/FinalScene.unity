@@ -6834,6 +6834,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1907360189769009417, guid: 71a886ffe455a5048a41737e0ae343b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9416027
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907360189769009417, guid: 71a886ffe455a5048a41737e0ae343b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.9416027
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907360189769009417, guid: 71a886ffe455a5048a41737e0ae343b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.9416027
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907360189769009417, guid: 71a886ffe455a5048a41737e0ae343b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5462558688504931808, guid: 71a886ffe455a5048a41737e0ae343b1, type: 3}
       propertyPath: m_Name
       value: CourtYardAssets (1)
