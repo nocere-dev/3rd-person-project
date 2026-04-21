@@ -42,7 +42,7 @@ public class PlayerKilling : MonoBehaviour {
         if (rightClickPressed)
         {
             Assassinating();
-            toolUses.uses++;
+            
         }
     }
 
@@ -63,6 +63,7 @@ public class PlayerKilling : MonoBehaviour {
         if (target != null)
         {
             Destroy(target);
+            toolUses.uses++;
             target = null;
         }
 
