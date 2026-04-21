@@ -5062,6 +5062,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a64e92dd5f36be4485aa3a44c4dca32, type: 2}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a64e92dd5f36be4485aa3a44c4dca32, type: 2}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b98cc69d579e7a45a4545a9584632b2, type: 2}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[9]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ea4a2683ac730124fa9523e685d830e6, type: 2}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[10]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3a64e92dd5f36be4485aa3a44c4dca32, type: 2}
+    - target: {fileID: 5439628146818974644, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: 'm_Materials.Array.data[12]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f8c36dd8f4b61084dbba71d96e9a579e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
