@@ -310,7 +310,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -468,7 +468,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -853,7 +853,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1254,6 +1254,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1428057750}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -388.87
@@ -2528,7 +2536,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3549,7 +3557,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3982,7 +3990,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4347,7 +4355,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4588,6 +4596,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1036962951}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -324.61
@@ -4695,7 +4711,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.8207547, g: 0.7704254, b: 0.7704254, a: 1}
-  m_Intensity: 0.57
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4924,6 +4940,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1316589615}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -313.87
@@ -6102,6 +6126,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 126135898}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -314.37
@@ -6251,7 +6283,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6390,6 +6422,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 270821251}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -375.04
@@ -7083,6 +7123,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 105527723}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -366.71
@@ -7200,6 +7248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puzzle1Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38f61d419f955a241b66818b071e275f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -7313,6 +7365,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 865007935}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -320.55
@@ -7435,7 +7495,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7776,6 +7836,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 782126962}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -394.5
@@ -7929,7 +7997,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8905,11 +8973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: 236bfdfad1d61194aa6698c3ba600682, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -5568371526223589888, guid: 236bfdfad1d61194aa6698c3ba600682, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: 236bfdfad1d61194aa6698c3ba600682, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -8925,7 +8993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 236bfdfad1d61194aa6698c3ba600682, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 236bfdfad1d61194aa6698c3ba600682, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -9571,6 +9639,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 210723895}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -379.2986
@@ -11483,7 +11559,7 @@ Transform:
   m_GameObject: {fileID: 572098847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23789848, y: 0.945, z: -0.016643682}
+  m_LocalPosition: {x: -0.251, y: 0.728, z: -0.017}
   m_LocalScale: {x: 0.51161367, y: 0.51161367, z: 0.51161367}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11529,7 +11605,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -12974,6 +13050,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 925341886}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -366.71
@@ -13323,7 +13407,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -13455,7 +13539,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -13535,6 +13619,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1943413228}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -297.49
@@ -13657,7 +13749,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -15409,6 +15501,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1970334554}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -342.11002
@@ -15887,7 +15987,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -16430,6 +16530,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 487914849}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -333.08
@@ -16552,7 +16660,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -16856,7 +16964,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -16953,6 +17061,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 442467361}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -293.5
@@ -17307,6 +17423,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 256367256}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -365.77
@@ -17778,6 +17902,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 10742326}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -373.08
@@ -18217,7 +18349,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -19402,6 +19534,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 865295199}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -345.38
@@ -19634,6 +19774,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1647125005}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -394.62
@@ -20059,7 +20207,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -21717,6 +21865,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1772791535}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -345.38
@@ -22419,7 +22575,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -23336,6 +23492,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 102901364}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -304.32
@@ -23515,6 +23679,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1258742758}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -355.97
@@ -23805,7 +23977,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -23986,6 +24158,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1381891353}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -353.65
@@ -24728,7 +24908,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -25528,6 +25708,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1296616473}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -379.95
@@ -26233,7 +26421,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 6
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -26472,6 +26660,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 709090606}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -394.1
@@ -27230,7 +27426,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -27423,7 +27619,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28584,7 +28780,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28917,7 +29113,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &1642786030
 Transform:
@@ -29893,7 +30089,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -30148,6 +30344,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1561181434}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -343.44
@@ -31189,6 +31393,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 2137512258}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -359.59
@@ -33297,7 +33509,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -33398,6 +33610,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1555712016}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -294.21
@@ -33691,7 +33911,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -33988,6 +34208,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 2093657249}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -315.91
@@ -34084,6 +34312,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 817469097}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -349.02
@@ -34307,7 +34543,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -34377,6 +34613,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1835165287}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -296.55
@@ -35795,7 +36039,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -35989,6 +36233,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1396469069}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -284.64
@@ -36569,7 +36821,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -37150,7 +37402,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -37220,6 +37472,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 349567744}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -371.44
@@ -37443,7 +37703,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -37702,6 +37962,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 1623192191}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -314.97
@@ -37938,7 +38206,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.7843138, g: 0.8000001, b: 0.43529415, a: 1}
-  m_Intensity: 10
+  m_Intensity: 14
   m_Range: 6
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -38171,6 +38439,14 @@ PrefabInstance:
       propertyPath: pathHolder
       value: 
       objectReference: {fileID: 2012575783}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50025816751499749, guid: 54445f52d83242b489f869dffce94942, type: 3}
+      propertyPath: detectionDecayRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2346464160895825480, guid: 54445f52d83242b489f869dffce94942, type: 3}
       propertyPath: m_LocalPosition.x
       value: -283.107
@@ -38365,6 +38641,14 @@ PrefabInstance:
       propertyPath: indicator
       value: 
       objectReference: {fileID: 317018101}
+    - target: {fileID: 5709822615826162584, guid: 4b94e874ee628eb47bd30bc6b23ec060, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709822615826162584, guid: 4b94e874ee628eb47bd30bc6b23ec060, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7336319579959602597, guid: 4b94e874ee628eb47bd30bc6b23ec060, type: 3}
       propertyPath: toolNameText
       value: 
