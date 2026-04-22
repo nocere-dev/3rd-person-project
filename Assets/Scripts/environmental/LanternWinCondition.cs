@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class LanternWinCondition : MonoBehaviour
 {
@@ -92,7 +93,6 @@ public class LanternWinCondition : MonoBehaviour
 
     void WinGame()
     {
-        Debug.Log("YOU WIN!");
-        // Add win screen, scene change, etc here
+        SceneManager.LoadScene("WinScene");
     }
 }
